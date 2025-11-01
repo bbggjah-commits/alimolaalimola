@@ -1,805 +1,609 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقع جبار بالأبيض والأسود</title>
-  <style>
-    :root {
-      --black: #0a0a0a;
-      --white: #f7f7f7;
-      --mid: #cfcfcf;
-      --accent: #1f1f1f;
-      --font-primary: "Tahoma", "Cairo", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-primary);
-      background-color: var(--black);
-      color: var(--white);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .container {
-      width: min(1100px, 92vw);
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 99;
-      background: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-    }
-
-    .brand {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.25rem;
-      text-transform: uppercase;
-    }
-
-    .menu {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .menu a {
-      font-size: 0.95rem;
-      letter-spacing: 0.08rem;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-    }
-
-    .menu a:hover,
-    .menu a:focus {
-      opacity: 1;
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      color: var(--white);
-      padding: 0.4rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      padding: 6rem 0 5rem;
-      background-image:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 60%);
-    }
-
-    .hero-content {
-      display: grid;
-      gap: 2.5rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-
-    .hero-title span {
-      display: block;
-      color: var(--white);
-      -webkit-text-stroke: 1px var(--white);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
-
-    .hero-text {
-      max-width: 600px;
-      color: var(--mid);
-      font-size: 1.05rem;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.85rem 2.5rem;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12rem;
-      border-radius: 4rem;
-      border: 2px solid var(--white);
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .btn-primary {
-      background: var(--white);
-      color: var(--black);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background: transparent;
-      color: var(--white);
-    }
-
-    .btn-outline:hover,
-    .btn-outline:focus {
-      background: var(--white);
-      color: var(--black);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.45rem 0.95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      font-size: 0.8rem;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      opacity: 0.85;
-    }
-
-    .features {
-      background: var(--white);
-      color: var(--black);
-      padding: 5rem 0;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15rem;
-    }
-
-    .section-text {
-      color: rgba(0, 0, 0, 0.65);
-      max-width: 650px;
-      margin-bottom: 3rem;
-      font-size: 1.05rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-
-    .feature-card {
-      background: var(--black);
-      color: var(--white);
-      border-radius: 1.5rem;
-      padding: 2.2rem;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .feature-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .feature-card:hover::after {
-      opacity: 1;
-    }
-
-    .feature-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      letter-spacing: 0.15rem;
-    }
-
-    .feature-title {
-      font-size: 1.3rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .feature-desc {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.97rem;
-    }
-
-    .split {
-      display: grid;
-      gap: 2.5rem;
-      align-items: center;
-      padding: 5rem 0;
-    }
-
-    .stats {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    }
-
-    .stat {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 1.8rem;
-      border-radius: 1rem;
-      text-align: center;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.9));
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 0.1rem;
-    }
-
-    .stat-label {
-      display: block;
-      margin-top: 0.6rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.08rem;
-      text-transform: uppercase;
-      opacity: 0.65;
-    }
-
-    .timeline {
-      padding: 5rem 0;
-      background: var(--white);
-      color: var(--black);
-    }
-
-    .timeline-line {
-      position: relative;
-      margin: 3rem 0;
-      padding-left: 1.5rem;
-      border-right: 2px solid var(--black);
-      border-radius: 2px;
-    }
-
-    .milestone {
-      position: relative;
-      padding: 1.8rem 1.8rem 1.8rem 0;
-    }
-
-    .milestone::before {
-      content: "";
-      position: absolute;
-      top: 1.9rem;
-      right: -11px;
-      width: 18px;
-      height: 18px;
-      background: var(--black);
-      border-radius: 50%;
-      border: 3px solid var(--white);
-    }
-
-    .milestone h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12rem;
-    }
-
-    .milestone p {
-      color: rgba(0, 0, 0, 0.7);
-    }
-
-    .testimonials {
-      padding: 5rem 0;
-    }
-
-    .testimonial-grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .testimonial-card {
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 1.3rem;
-      padding: 2rem;
-      background: linear-gradient(150deg, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.85));
-      position: relative;
-    }
-
-    .testimonial-card::before {
-      content: "“";
-      position: absolute;
-      top: 1.2rem;
-      right: 1.5rem;
-      font-size: 3rem;
-      color: rgba(255, 255, 255, 0.1);
-    }
-
-    .testimonial-text {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.75);
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial-author {
-      font-weight: 600;
-      letter-spacing: 0.08rem;
-      text-transform: uppercase;
-    }
-
-    .contact {
-      padding: 5rem 0;
-      background: var(--white);
-      color: var(--black);
-    }
-
-    .contact-grid {
-      display: grid;
-      gap: 3rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    form {
-      display: grid;
-      gap: 1.2rem;
-    }
-
-    label {
-      font-size: 0.9rem;
-      letter-spacing: 0.08rem;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 0.4rem;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 0.9rem 1rem;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      border-radius: 0.8rem;
-      background: rgba(0, 0, 0, 0.04);
-      font-size: 1rem;
-      color: var(--black);
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: 2px solid var(--black);
-    }
-
-    textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .contact-info {
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      border-radius: 1.2rem;
-      padding: 2.4rem;
-      background: linear-gradient(150deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
-    }
-
-    .contact-info h3 {
-      margin-bottom: 1.2rem;
-      font-size: 1.4rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15rem;
-    }
-
-    .contact-info p {
-      color: rgba(0, 0, 0, 0.7);
-      margin-bottom: 1.8rem;
-      line-height: 1.8;
-    }
-
-    .info-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .info-label {
-      text-transform: uppercase;
-      letter-spacing: 0.1rem;
-      font-size: 0.75rem;
-      color: rgba(0, 0, 0, 0.5);
-    }
-
-    .info-value {
-      font-weight: 600;
-    }
-
-    footer {
-      padding: 2.5rem 0;
-      background: var(--black);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .footer-top {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-bottom: 2rem;
-    }
-
-    .footer-brand {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.25rem;
-      text-transform: uppercase;
-    }
-
-    .footer-text {
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 1rem;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
-      letter-spacing: 0.08rem;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      transition: color 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-    }
-
-    .footer-bottom {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      text-align: center;
-      font-size: 0.8rem;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.45);
-    }
-
-    @media (max-width: 780px) {
-      .nav-toggle {
-        display: inline-flex;
-      }
-
-      .menu {
-        position: absolute;
-        inset-inline: 0;
-        top: 100%;
-        background: rgba(0, 0, 0, 0.97);
-        flex-direction: column;
-        padding: 1.5rem;
-        gap: 1rem;
-        transform: translateY(-20px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-      }
-
-      .menu.open {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .hero {
-        padding-top: 4.5rem;
-      }
-
-      .actions {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع أنيق بالأبيض والأسود</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+            border-radius: 4px;
+        }
+        
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #000000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Navigation styles */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: #000000;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero section animations */
+        .hero-title {
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-subtitle {
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .hero-button {
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Card hover effects */
+        .card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            transition: right 0.5s ease;
+        }
+        
+        .card:hover::before {
+            right: 100%;
+        }
+        
+        /* Grid pattern background */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Typing animation */
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid #000000;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #000000 }
+        }
+        
+        /* Parallax effect */
+        .parallax {
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        
+        /* Button styles */
+        .btn-black {
+            background-color: #000000;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-black:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+        
+        .btn-black::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: #ffffff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-black:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Service cards */
+        .service-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Footer animation */
+        .footer-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000000' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            animation: wave 10s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1440px); }
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Fade in animation on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">JABBAR</div>
-      <button class="nav-toggle" aria-expanded="false">القائمة</button>
-      <ul class="menu" id="primary-menu">
-        <li><a href="#hero">الرئيسية</a></li>
-        <li><a href="#features">المزايا</a></li>
-        <li><a href="#journey">الرحلة</a></li>
-        <li><a href="#voices">الشهادات</a></li>
-        <li><a href="#contact">تواصل</a></li>
-      </ul>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
     </div>
-  </header>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="container hero-content">
-        <div>
-          <span class="badge">إبداع أحادي اللون</span>
-          <h1 class="hero-title">
-            موقع <span>جبار</span> بالأبيض والأسود
-          </h1>
-          <p class="hero-text">
-            قوة التصميم تكمن في البساطة. هنا نصنع تجربة سوداء وبيضاء لا تُنسى، بجرأة خطوطها، نقاء مساحاتها، وإيقاع تفاصيلها. انطلق مع هوية رقمية تُعانق الضوء والظل.
-          </p>
-          <div class="actions">
-            <a class="btn btn-primary" href="#contact">ابدأ مشروعك الآن</a>
-            <a class="btn btn-outline" href="#features">اكتشف التفاصيل</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="features" id="features">
-      <div class="container">
-        <h2 class="section-title">مزايا لا مثيل لها</h2>
-        <p class="section-text">
-          تصميم بالأبيض والأسود يمنحك حضوراً لا يُنسى، يعكس ثقة العلامة، ويُبرز ثراء المحتوى دون تشويش. كل عنصر صُمم ليحكي قصة جريئة بلغة الضوء والظل.
-        </p>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon">01</div>
-            <h3 class="feature-title">هوية بصرية نقية</h3>
-            <p class="feature-desc">
-              توازن متقن بين الأبيض والأسود يضمن وضوح الرسالة وجرأة الحضور، مع تباين مدروس يبرز النقاط الجوهرية.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">02</div>
-            <h3 class="feature-title">تجربة مستخدم سلسة</h3>
-            <p class="feature-desc">
-              مسارات تصفح بديهية، عناصر متوازنة، ومحتوى منظم يضمن تفاعلاً سريعاً وفعالاً على مختلف الأجهزة.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">03</div>
-            <h3 class="feature-title">جاهزية للانطلاق</h3>
-            <p class="feature-desc">
-              بنية مرنة قابلة للتطوير، متوافقة مع أفضل ممارسات الويب، ومستعدة لاستقبال المحتوى فوراً.
-            </p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">04</div>
-            <h3 class="feature-title">تفاصيل داخل التفاصيل</h3>
-            <p class="feature-desc">
-              إطارات أنيقة، خطوط رشيقة، وحركات دقيقة تخلق بصمة لا تشبه سوى علامتك.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="split">
-      <div class="container">
-        <div class="split">
-          <div>
-            <h2 class="section-title">أرقام تتحدث</h2>
-            <p class="section-text" style="color: rgba(255,255,255,0.7);">
-              نخلق مواقع تترك أثراً طويل المدى، من الجلسة الأولى وحتى الولاء التام. التصميم الأحادي اللون ليس مجرد موضة، بل فلسفة تركز على قيمة المحتوى.
-            </p>
-            <div class="stats">
-              <div class="stat">
-                <span class="stat-number">+340%</span>
-                <span class="stat-label">زيادة التفاعل</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">95%</span>
-                <span class="stat-label">رضا العملاء</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">دعم مخصص</span>
-              </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <span class="text-black">BW</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-reverse space-x-8">
+                    <a href="#home" class="nav-link text-black hover:text-gray-600">الرئيسية</a>
+                    <a href="#about" class="nav-link text-black hover:text-gray-600">من نحن</a>
+                    <a href="#services" class="nav-link text-black hover:text-gray-600">خدماتنا</a>
+                    <a href="#portfolio" class="nav-link text-black hover:text-gray-600">أعمالنا</a>
+                    <a href="#contact" class="nav-link text-black hover:text-gray-600">تواصل معنا</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-2xl text-black"></i>
+                </button>
             </div>
-          </div>
-          <div>
-            <h2 class="section-title">طاقة التصميم</h2>
-            <p class="section-text" style="color: rgba(255,255,255,0.7);">
-              نُعيد تعريف معنى “الموقع الجبار” عبر رحلة مدروسة من البحث، التفكير، التصميم، والاختبار. فريقنا يرافق العلامة في كل خطوة ليضمن تميزها في المشهد الرقمي.
-            </p>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="timeline" id="journey">
-      <div class="container">
-        <h2 class="section-title">رحلة التنفيذ</h2>
-        <p class="section-text">
-          من الفكرة الأولى إلى الإطلاق المبهر، نرسم مساراً واضحاً يضمن توافق الرؤية مع التنفيذ حتى آخر بكسل.
-        </p>
-        <div class="timeline-line">
-          <div class="milestone">
-            <h3>01 | اكتشاف الهوية</h3>
-            <p>جلسات مكثفة لفهم شخصية العلامة، جمهورها، وأهدافها الرقميّة.</p>
-          </div>
-          <div class="milestone">
-            <h3>02 | رسم الإطار</h3>
-            <p>بناء خريطة محتوى مرنة، تحديد البنية المعلوماتية، واختيار العناصر الحاسمة.</p>
-          </div>
-          <div class="milestone">
-            <h3>03 | صياغة التصميم</h3>
-            <p>توليفة سوداء وبيضاء متوازنة، حركية دقيقة، وتفاصيل بصرية تنبض بالحياة.</p>
-          </div>
-          <div class="milestone">
-            <h3>04 | الإطلاق والتطوير</h3>
-            <p>اختبارات أداء، تحسين مستمر، ودعم مخصص لضمان استمرار اللمعان.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="testimonials" id="voices">
-      <div class="container">
-        <h2 class="section-title">أصوات تثق بنا</h2>
-        <p class="section-text" style="color: rgba(255,255,255,0.7);">
-          كلمات عملائنا تبرهن على قوة ما نقدمه. كل مشروع هو شراكة هدفها التفوق وخلق تجربة لا تُنسى.
-        </p>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <p class="testimonial-text">
-              “انطلاقة مذهلة، الموقع الأبيض والأسود جعل علامتنا تبدو أكثر جرأة ونضوجاً من أي وقت مضى.”
-            </p>
-            <div class="testimonial-author">ليان السعدي — مؤسسة، نوفا ستوديو</div>
-          </article>
-          <article class="testimonial-card">
-            <p class="testimonial-text">
-              “تناغم لونين فقط خلق تجربة استثنائية لزوارنا. الفريق فهمنا بعمق وصمم حلولاً تفوق التوقع.”
-            </p>
-            <div class="testimonial-author">فهد العلي — مدير تسويق، برادايم</div>
-          </article>
-          <article class="testimonial-card">
-            <p class="testimonial-text">
-              “الدقة، السرعة، والاحترافية. موقع جبار بكل ما تحمله الكلمة من معنى!”
-            </p>
-            <div class="testimonial-author">نور الهاشم — شريكة، أورجنك لاب</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container">
-        <div class="contact-grid">
-          <div>
-            <h2 class="section-title">ابدأ المغامرة</h2>
-            <p class="section-text">
-              أخبرنا عن مشروعك ودعنا نصنع سوياً موقعاً أحادي اللون يترك بصمته فوراً. نعود إليك خلال 24 ساعة.
-            </p>
-            <form>
-              <div>
-                <label for="name">الاسم الكامل</label>
-                <input id="name" type="text" name="name" placeholder="مثال: سارة الخطيب" required>
-              </div>
-              <div>
-                <label for="email">البريد الإلكتروني</label>
-                <input id="email" type="email" name="email" placeholder="name@example.com" required>
-              </div>
-              <div>
-                <label for="project">وصف المشروع</label>
-                <textarea id="project" name="project" placeholder="شاركنا رؤيتك، أهدافك، والجمهور المستهدف." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">أرسل الرسالة</button>
-            </form>
-          </div>
-          <div class="contact-info">
-            <h3>لماذا نحن؟</h3>
-            <p>
-              لأننا نؤمن أن جرأة الأبيض والأسود قادرة على إعادة تشكيل تجربة المستخدم. نضع الإحساس قبل الشكل، ونضمن أن كل تفاصيل تعكس جوهر العلامة.
-            </p>
-            <div class="info-item">
-              <span class="info-label">الموقع</span>
-              <span class="info-value">دبي، الإمارات العربية المتحدة</span>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 left-0 w-64 h-full bg-white shadow-lg md:hidden" id="mobileMenu">
+            <div class="p-6">
+                <button class="absolute top-4 left-4" id="closeMobileMenu">
+                    <i class="fas fa-times text-2xl text-black"></i>
+                </button>
+                <div class="mt-12 space-y-6">
+                    <a href="#home" class="block text-black hover:text-gray-600 text-lg">الرئيسية</a>
+                    <a href="#about" class="block text-black hover:text-gray-600 text-lg">من نحن</a>
+                    <a href="#services" class="block text-black hover:text-gray-600 text-lg">خدماتنا</a>
+                    <a href="#portfolio" class="block text-black hover:text-gray-600 text-lg">أعمالنا</a>
+                    <a href="#contact" class="block text-black hover:text-gray-600 text-lg">تواصل معنا</a>
+                </div>
             </div>
-            <div class="info-item">
-              <span class="info-label">الهاتف</span>
-              <span class="info-value">+971 50 000 0000</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">البريد</span>
-              <span class="info-value">hello@jabbar.design</span>
-            </div>
-          </div>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center grid-pattern">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="hero-title text-5xl md:text-7xl font-black mb-6">
+                الأناقة في <span class="text-black">البساطة</span>
+            </h1>
+            <p class="hero-subtitle text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                نخلق تجارب رقمية استثنائية باللونين الأبيض والأسود
+            </p>
+            <div class="hero-button">
+                <button class="btn-black px-8 py-4 rounded-full text-lg font-semibold relative">
+                    اكتشف المزيد
+                </button>
+            </div>
+            
+            <div class="mt-16 fade-in">
+                <p class="typing text-lg font-medium inline-block">تصميم عصري • إبداع لا حدود له • جودة فائقة</p>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-black"></i>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand">JABBAR</div>
-          <p class="footer-text">
-            موقع أحادي اللون يقود علامتك نحو حضور رقمي لا يُنسى. التصميم هو القوة، والجرأة خيارنا الأول.
-          </p>
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="text-4xl font-bold mb-6">من نحن</h2>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        نحن فريق من المبدعين المكرسين لفن التصميم بالأبيض والأسود. نؤمن بأن البساطة هي قوة، 
+                        وأن الألوان الأحادية يمكن أن تنقل أقوى الرسائل.
+                    </p>
+                    <p class="text-lg mb-8 leading-relaxed">
+                        منذ عام 2020، قمنا بإنشاء مشاريع مذهلة تجمع بين الجمال والوظيفة، 
+                        وكل عمل نقدمه هو شهادة على التزامنا بالتميز.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="card bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-3xl font-bold">150+</h3>
+                            <p class="text-gray-600">مشروع</p>
+                        </div>
+                        <div class="card bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-3xl font-bold">98%</h3>
+                            <p class="text-gray-600">رضا العملاء</p>
+                        </div>
+                        <div class="card bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-3xl font-bold">24/7</h3>
+                            <p class="text-gray-600">دعم فني</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="relative">
+                        <img src="https://picsum.photos/seed/bwdesign/600/400" alt="About us" class="rounded-lg shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-black rounded-lg"></div>
+                        <div class="absolute -top-6 -right-6 w-24 h-24 border-4 border-black rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-          <h4 class="footer-brand" style="font-size: 0.9rem;">روابط</h4>
-          <ul class="footer-links">
-            <li><a href="#hero">الرئيسية</a></li>
-            <li><a href="#features">المزايا</a></li>
-            <li><a href="#journey">الرحلة</a></li>
-            <li><a href="#voices">الشهادات</a></li>
-            <li><a href="#contact">تواصل</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-brand" style="font-size: 0.9rem;">النشرة البريدية</h4>
-          <p class="footer-text">
-            اشترك لتحصل على أحدث الرؤى في تصميمات الأبيض والأسود، وأفكاراً تسبق العصر.
-          </p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2025 JABBAR DESIGN</span>
-        <span>كل الحقوق محفوظة</span>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    const navToggle = document.querySelector(".nav-toggle");
-    const menu = document.querySelector("#primary-menu");
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in">خدماتنا</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card card bg-white p-8 rounded-lg shadow-lg fade-in">
+                    <div class="service-icon w-16 h-16 bg-black rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-paint-brush text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">التصميم الجرافيكي</h3>
+                    <p class="text-gray-600">
+                        نقدم حلولاً تصميمية مبتكرة تجمع بين الأناقة والفعالية، مع التركيز على التفاصيل الدقيقة.
+                    </p>
+                </div>
+                
+                <div class="service-card card bg-white p-8 rounded-lg shadow-lg fade-in">
+                    <div class="service-icon w-16 h-16 bg-black rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">تطوير المواقع</h3>
+                    <p class="text-gray-600">
+                        نصمم ونطور مواقع ويب احترافية سريعة ومتجاوبة مع جميع الأجهزة.
+                    </p>
+                </div>
+                
+                <div class="service-card card bg-white p-8 rounded-lg shadow-lg fade-in">
+                    <div class="service-icon w-16 h-16 bg-black rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">تطبيقات الموبايل</h3>
+                    <p class="text-gray-600">
+                        نبتكر تطبيقات موبايل عصرية توفر تجربة مستخدم استثنائية وواجهة جذابة.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    navToggle.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", isOpen);
-    });
-  </script>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in">أعمالنا</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project1/400/300" alt="Project 1" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-2xl font-bold mb-2">مشروع رقم 1</h3>
+                            <p class="text-gray-300">تصميم هوية بصرية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project2/400/300" alt="Project 2" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-2xl font-bold mb-2">مشروع رقم 2</h3>
+                            <p class="text-gray-300">موقع إلكتروني</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project3/400/300" alt="Project 3" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-2xl font-bold mb-2">مشروع رقم 3</h3>
+                            <p class="text-gray-300">تطبيق موبايل</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project4/400/300" alt="Project 4" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-2xl font-bold mb-2">مشروع رقم 4</h3>
+                            <p class="text-gray-300">حملة تسويقية</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project5/400/300" alt="Project 5" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-2xl font-bold mb-2">مشروع رقم 5</h3>
+                            <p class="text-gray-300">تصميم داخلي</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card group relative overflow-hidden rounded-lg shadow-lg fade-in">
+                    <img src="https://picsum.photos/seed/project6/400/300" alt="Project 6" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center">
+                        <div class="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="white text-2xl font-bold mb-2">مشروع رقم 6</h3>
+                            <p class="text-gray-300">علامة تجارية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in">تواصل معنا</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6 fade-in">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="الاسم" class="w-full px-6 py-4 border-2 border-black rounded-lg focus:outline-none focus:border-gray-400 transition-colors">
+                        <input type="email" placeholder="البريد الإلكتروني" class="w-full px-6 py-4 border-2 border-black rounded-lg focus:outline-none focus:border-gray-400 transition-colors">
+                    </div>
+                    <input type="text" placeholder="الموضوع" class="w-full px-6 py-4 border-2 border-black rounded-lg focus:outline-none focus:border-gray-400 transition-colors">
+                    <textarea placeholder="رسالتك" rows="6" class="w-full px-6 py-4 border-2 border-black rounded-lg focus:outline-none focus:border-gray-400 transition-colors resize-none"></textarea>
+                    <button type="submit" class="btn-black w-full py-4 rounded-lg text-lg font-semibold relative">
+                        إرسال الرسالة
+                    </button>
+                </form>
+                
+                <div class="mt-12 text-center fade-in">
+                    <div class="flex justify-center space-x-reverse space-x-6">
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors">
+                            <i class="fab fa-facebook-f text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-600 transition-colors">
+                            <i class="fab fa-linkedin-in text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 relative overflow-hidden">
+        <div class="footer-wave"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold mb-4">BW Studio</h3>
+                <p class="text-gray-400 mb-8">الأبيض والأسود - لغة التصميم الخالدة</p>
+                <p class="text-gray-500">© 2024 جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hide loader when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(el => {
+                const speed = el.dataset.speed || 0.5;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('شكراً لتواصلك معنا! سنرد عليك قريباً.');
+            e.target.reset();
+        });
+
+        // Add parallax class to hero section
+        document.querySelector('#home').classList.add('parallax');
+        document.querySelector('#home').dataset.speed = '0.3';
+    </script>
 </body>
 </html>
