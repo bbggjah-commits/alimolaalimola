@@ -3,688 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل نماذج الذكاء الاصطناعي</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#5D5CDE',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>JKO | موقع تجريبي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
         body {
-            font-family: 'Cairo', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        /* الترويسة */
+        header {
+            background: linear-gradient(135deg, #000 0%, #222 100%);
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #fff, #aaa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: 3px;
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        nav ul {
+            display: flex;
+            list-style: none;
         }
 
-        .card-gradient {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+        nav li {
+            margin-left: 2rem;
         }
 
-        .card {
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease;
         }
 
-        .badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        nav a:hover::after {
+            width: 100%;
         }
 
-        .expand-content {
-            max-height: 0;
+        /* القسم الرئيسي */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            transition: max-height 0.3s ease;
         }
 
-        .expand-content.active {
-            max-height: 2000px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
         }
 
-        .tag {
-            background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, #fff, #aaa, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
         }
 
-        .pros-cons {
-            border-right: 4px solid;
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
-        .pros {
-            border-image: linear-gradient(to bottom, #10b981, #34d399) 1;
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #ddd;
         }
 
-        .cons {
-            border-image: linear-gradient(to bottom, #ef4444, #f87171) 1;
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* الأقسام */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: #ccc;
+        }
+
+        /* معرض الصور */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        /* الفوتر */
+        footer {
+            background: #111;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* تأثيرات إضافية */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
-<body class="bg-white dark:bg-[#181818] text-gray-900 dark:text-white transition-colors duration-300">
+<body>
+    <!-- تأثير الجسيمات المتحركة -->
+    <div class="particles" id="particles"></div>
 
-    <!-- Header -->
-    <header class="gradient-bg text-white py-8 sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto px-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-center">🤖 دليل نماذج الذكاء الاصطناعي</h1>
-            <p class="text-center mt-2 text-sm md:text-base opacity-90">اكتشف أفضل 15 نموذج ذكاء اصطناعي وابدأ رحلتك</p>
+    <!-- الترويسة -->
+    <header>
+        <div class="header-content">
+            <div class="logo">JKO</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#gallery">المعرض</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Search Bar -->
-    <div class="container mx-auto px-4 py-6">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="🔍 ابحث عن نموذج معين..."
-            class="w-full max-w-2xl mx-auto block px-6 py-3 text-base rounded-full border-2 border-purple-300 dark:border-purple-600 bg-white dark:bg-gray-800 focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 transition-all shadow-lg"
-        >
-    </div>
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>مرحباً بك في JKO</h1>
+            <p>هذا موقع تجريبي جميل جداً جداً تم تصميمه باستخدام الألوان الأبيض والأسود فقط، مع تأثيرات بصرية مذهلة لتجربة مستخدم استثنائية.</p>
+            <a href="#about" class="btn">اكتشف المزيد</a>
+        </div>
+    </section>
 
-    <!-- Filter Buttons -->
-    <div class="container mx-auto px-4 pb-6 flex flex-wrap justify-center gap-3">
-        <button onclick="filterAI('all')" class="filter-btn px-4 py-2 rounded-full bg-purple-500 text-white text-sm font-semibold hover:bg-purple-600 transition">الكل</button>
-        <button onclick="filterAI('text')" class="filter-btn px-4 py-2 rounded-full bg-blue-500 text-white text-sm font-semibold hover:bg-blue-600 transition">نصوص</button>
-        <button onclick="filterAI('image')" class="filter-btn px-4 py-2 rounded-full bg-pink-500 text-white text-sm font-semibold hover:bg-pink-600 transition">صور</button>
-        <button onclick="filterAI('video')" class="filter-btn px-4 py-2 rounded-full bg-indigo-500 text-white text-sm font-semibold hover:bg-indigo-600 transition">فيديو</button>
-        <button onclick="filterAI('audio')" class="filter-btn px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition">صوت</button>
-    </div>
+    <!-- قسم من نحن -->
+    <section id="about">
+        <h2 class="section-title">من نحن</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>رؤيتنا</h3>
+                <p>نحن نؤمن بأن الجمال في البساطة. تصميمنا بالأبيض والأسود يعكس فلسفتنا في التركيز على الجوهر بدون تشتيت.</p>
+            </div>
+            <div class="feature-card">
+                <h3>مهمتنا</h3>
+                <p>تقديم تجربة مستخدم استثنائية من خلال تصميم أنيق وجميل مع الحفاظ على الوظائف الأساسية والأداء المتميز.</p>
+            </div>
+            <div class="feature-card">
+                <h3>قيمنا</h3>
+                <p>البساطة، الجمال، الوظيفية، والإبداع هي القيم الأساسية التي نؤمن بها ونسعى لتحقيقها في كل مشروع.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- AI Models Container -->
-    <div id="aiContainer" class="container mx-auto px-4 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Cards will be inserted here by JavaScript -->
-    </div>
+    <!-- قسم الخدمات -->
+    <section id="services">
+        <h2 class="section-title">الخدمات</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>التصميم الجرافيكي</h3>
+                <p>نقدم خدمات تصميم جرافيكي متميزة تركز على البساطة والجمال مع الحفاظ على الهوية البصرية المميزة.</p>
+            </div>
+            <div class="feature-card">
+                <h3>تطوير الويب</h3>
+                <p>نطور مواقع ويب جميلة ووظيفية مع التركيز على تجربة المستخدم والأداء المتميز والتجاوب مع جميع الأجهزة.</p>
+            </div>
+            <div class="feature-card">
+                <h3>الاستشارات</h3>
+                <p>نقدم استشارات متخصصة في مجال التصميم وتجربة المستخدم لمساعدتك في تحقيق أهدافك الرقمية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المعرض -->
+    <section id="gallery">
+        <h2 class="section-title">المعرض</h2>
+        <div class="gallery">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h2 class="logo">JKO</h2>
+            <p>موقع جميل جداً تم تصميمه خصيصاً لتجربة قدرات التصميم باستخدام الأبيض والأسود فقط</p>
+            <div class="social-links">
+                <a href="#">فيسبوك</a>
+                <a href="#">تويتر</a>
+                <a href="#">إنستغرام</a>
+                <a href="#">لينكد إن</a>
+            </div>
+            <p class="copyright">جميع الحقوق محفوظة &copy; 2023 JKO</p>
+        </div>
+    </footer>
 
     <script>
-        // Dark mode detection
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-
-        // AI Models Data
-        const aiModels = [
-            {
-                id: 1,
-                name: "ChatGPT",
-                company: "OpenAI",
-                type: "text",
-                icon: "💬",
-                summary: "الأكثر شهرة في العالم للمحادثة والإجابة على الأسئلة",
-                description: "ChatGPT هو نموذج ذكاء اصطناعي متقدم من OpenAI يستخدم تقنية GPT (Generative Pre-trained Transformer) للمحادثة الطبيعية وتوليد النصوص. يتميز بفهم عميق للسياق والقدرة على إجراء محادثات معقدة.",
-                pros: [
-                    "واجهة سهلة الاستخدام",
-                    "قاعدة معرفية ضخمة",
-                    "يدعم أكثر من 80 لغة",
-                    "نسخة مجانية متاحة",
-                    "يمكنه كتابة الأكواد البرمجية"
-                ],
-                cons: [
-                    "المعلومات محدودة حتى 2023",
-                    "قد يقدم معلومات غير دقيقة أحياناً",
-                    "النسخة المدفوعة مكلفة نسبياً"
-                ],
-                bestFor: "الطلاب، المبرمجين، الكتّاب، الباحثين، وأي شخص يريد مساعد ذكي شامل",
-                website: "https://chat.openai.com",
-                apps: {
-                    ios: "https://apps.apple.com/app/openai-chatgpt/id6448311069",
-                    android: "https://play.google.com/store/apps/details?id=com.openai.chatgpt"
-                }
-            },
-            {
-                id: 2,
-                name: "Claude",
-                company: "Anthropic",
-                type: "text",
-                icon: "🧠",
-                summary: "نموذج متقدم يركز على الأمان والدقة في الإجابات",
-                description: "Claude هو نموذج ذكاء اصطناعي من Anthropic مصمم ليكون آمناً ومفيداً وصادقاً. يتميز بقدرات تحليلية متقدمة ونافذة سياق أكبر من معظم المنافسين، مما يسمح له بمعالجة وثائق طويلة.",
-                pros: [
-                    "نافذة سياق ضخمة (200K رمز)",
-                    "دقة عالية في التحليل",
-                    "ممتاز في فهم النصوص الطويلة",
-                    "أخلاقي وآمن",
-                    "يدعم الملفات والصور"
-                ],
-                cons: [
-                    "أقل شهرة من ChatGPT",
-                    "لا يتوفر في جميع الدول",
-                    "عدد الرسائل المجانية محدود"
-                ],
-                bestFor: "الباحثين، المحللين، المحامين، الكتاب الذين يعملون على مستندات طويلة",
-                website: "https://claude.ai",
-                apps: {
-                    ios: "https://apps.apple.com/app/claude-by-anthropic/id6473753684",
-                    android: "متوفر عبر المتصفح فقط"
-                }
-            },
-            {
-                id: 3,
-                name: "Gemini",
-                company: "Google",
-                type: "text",
-                icon: "✨",
-                summary: "نموذج Google المتعدد الوسائط مع اتصال بالإنترنت",
-                description: "Gemini (سابقاً Bard) هو نموذج الذكاء الاصطناعي من Google الذي يدمج قدرات البحث على الإنترنت مع فهم اللغة الطبيعية. يتميز بالوصول المباشر لمعلومات حديثة ومحدثة.",
-                pros: [
-                    "متصل بالإنترنت للمعلومات الحديثة",
-                    "مجاني بالكامل",
-                    "تكامل مع خدمات Google",
-                    "يدعم الصور والفيديو",
-                    "يولد صور عبر Google Imagen"
-                ],
-                cons: [
-                    "أحياناً أقل دقة من المنافسين",
-                    "واجهة المستخدم أقل بساطة",
-                    "استجابات أطول من اللازم أحياناً"
-                ],
-                bestFor: "من يبحث عن معلومات حديثة، مستخدمي خدمات Google، الطلاب",
-                website: "https://gemini.google.com",
-                apps: {
-                    ios: "https://apps.apple.com/app/google-gemini/id6596279056",
-                    android: "https://play.google.com/store/apps/details?id=com.google.android.apps.bard"
-                }
-            },
-            {
-                id: 4,
-                name: "Microsoft Copilot",
-                company: "Microsoft",
-                type: "text",
-                icon: "🚀",
-                summary: "مساعد Microsoft المدمج في Windows وتطبيقات Office",
-                description: "Microsoft Copilot يجمع بين قوة GPT-4 ومحرك بحث Bing. مدمج في Windows 11 ومجموعة Office، يوفر مساعدة ذكية في العمل اليومي.",
-                pros: [
-                    "مجاني ويستخدم GPT-4",
-                    "متصل بالإنترنت",
-                    "مدمج في Windows وOffice",
-                    "يولد صور عبر DALL-E",
-                    "واجهة احترافية"
-                ],
-                cons: [
-                    "يتطلب حساب Microsoft",
-                    "بعض الميزات تتطلب اشتراكات Microsoft 365",
-                    "أقل مرونة في المحادثات المعقدة"
-                ],
-                bestFor: "مستخدمي Windows وOffice، المحترفين، طلاب الجامعات",
-                website: "https://copilot.microsoft.com",
-                apps: {
-                    ios: "https://apps.apple.com/app/microsoft-copilot/id6472538445",
-                    android: "https://play.google.com/store/apps/details?id=com.microsoft.copilot"
-                }
-            },
-            {
-                id: 5,
-                name: "Meta AI (Llama)",
-                company: "Meta",
-                type: "text",
-                icon: "🦙",
-                summary: "نموذج مفتوح المصدر من Meta متاح عبر تطبيقاتها",
-                description: "Meta AI مبني على نموذج Llama ��لمفتوح المصدر. متوفر مباشرة في WhatsApp وInstagram وFacebook، يوفر مساعدة ذكية أثناء المحادثات.",
-                pros: [
-                    "مجاني تماماً",
-                    "مدمج في تطبيقات Meta",
-                    "مفتوح المصدر (Llama)",
-                    "يولد صور مجاناً",
-                    "سهل الوصول"
-                ],
-                cons: [
-                    "أقل قدرة من GPT-4 وClaude",
-                    "محدود في بعض اللغات",
-                    "يتطلب حساب Meta"
-                ],
-                bestFor: "مستخدمي WhatsApp وInstagram، المطورين المهتمين بالمصادر المفتوحة",
-                website: "https://www.meta.ai",
-                apps: {
-                    ios: "متوفر عبر WhatsApp وInstagram",
-                    android: "متوفر عبر WhatsApp وInstagram"
-                }
-            },
-            {
-                id: 6,
-                name: "Midjourney",
-                company: "Midjourney Inc",
-                type: "image",
-                icon: "🎨",
-                summary: "الأفضل في توليد صور فنية واحترافية عالية الجودة",
-                description: "Midjourney هو نموذج ذكاء اصطناعي متخصص في توليد الصور الفنية والإبداعية. يشتهر بجودته الفائقة وأسلوبه الفني المميز.",
-                pros: [
-                    "جودة صور استثنائية",
-                    "أسلوب فني مميز",
-                    "مجتمع كبير ومبدع",
-                    "تحديثات مستمرة",
-                    "تحكم متقدم في الأسلوب"
-                ],
-                cons: [
-                    "لا توجد نسخة مجانية",
-                    "يعمل فقط عبر Discord",
-                    "منحنى تعلم صعب للمبتدئين",
-                    "اشتراك شهري مكلف"
-                ],
-                bestFor: "الفنانين، المصممين، صناع المحتوى، المسوقين",
-                website: "https://www.midjourney.com",
-                apps: {
-                    ios: "يعمل عبر Discord",
-                    android: "يعمل عبر Discord"
-                }
-            },
-            {
-                id: 7,
-                name: "DALL-E 3",
-                company: "OpenAI",
-                type: "image",
-                icon: "🖼️",
-                summary: "توليد صور واقعية ودقيقة من الأوصاف النصية",
-                description: "DALL-E 3 هو أحدث نسخة من نموذج OpenAI لتوليد الصور. يتميز بفهم دقيق للأوامر النصية وقدرة على إنشاء صور واقعية ومفصلة.",
-                pros: [
-                    "فهم دقيق للنصوص",
-                    "صور واقعية وعالية الجودة",
-                    "مدمج في ChatGPT Plus",
-                    "يدعم النصوص داخل الصور",
-                    "واجهة سهلة"
-                ],
-                cons: [
-                    "يتطلب اشتراك ChatGPT Plus",
-                    "عدد صور محدود شهرياً",
-                    "بعض القيود على المحتوى"
-                ],
-                bestFor: "مستخدمي ChatGPT Plus، المسوقين، المصممين، صناع المحتوى",
-                website: "https://openai.com/dall-e-3",
-                apps: {
-                    ios: "عبر تطبيق ChatGPT",
-                    android: "عبر تطبيق ChatGPT"
-                }
-            },
-            {
-                id: 8,
-                name: "Stable Diffusion",
-                company: "Stability AI",
-                type: "image",
-                icon: "🌌",
-                summary: "نموذج مفتوح المصدر قوي ومجاني لتوليد الصور",
-                description: "Stable Diffusion هو نموذج مفتوح المصدر لتوليد الصور، يمكن تشغيله محلياً على جهازك. يوفر مرونة كبيرة وتخصيص غير محدود.",
-                pros: [
-                    "مفتوح المصدر ومجاني",
-                    "يعمل على جهازك الشخصي",
-                    "تخصيص غير محدود",
-                    "مجتمع ضخم من المطورين",
-                    "لا توجد قيود على المحتوى"
-                ],
-                cons: [
-                    "يتطلب معرفة تقنية",
-                    "يحتاج كرت شاشة قوي",
-                    "جودة أقل من Midjourney افتراضياً",
-                    "معقد للمبتدئين"
-                ],
-                bestFor: "المطورين، المحترفين التقنيين، من يريد خصوصية كاملة",
-                website: "https://stability.ai",
-                apps: {
-                    ios: "يتطلب استضافة خاصة",
-                    android: "يتطلب استضافة خاصة"
-                }
-            },
-            {
-                id: 9,
-                name: "Perplexity AI",
-                company: "Perplexity",
-                type: "text",
-                icon: "🔍",
-                summary: "محرك بحث ذكي يجمع المعلومات مع ذكر المصادر",
-                description: "Perplexity AI يجمع بين قوة الذكاء الاصطناعي ومحركات البحث. يقدم إجابات دقيقة مع ذكر المصادر، مما يجعله مثالياً للبحث الأكاديمي.",
-                pros: [
-                    "يذكر مصادر المعلومات",
-                    "معلومات حديثة ودقيقة",
-                    "مجاني مع خيار Pro",
-                    "واجهة نظيفة وبسيطة",
-                    "ممتاز للبحث الأكاديمي"
-                ],
-                cons: [
-                    "ليس محادثياً مثل ChatGPT",
-                    "النسخة المجانية محدودة",
-                    "أحياناً يفضل الكم على الجودة"
-                ],
-                bestFor: "الباحثين، الطلاب، الصحفيين، من يحتاج معلومات موثوقة",
-                website: "https://www.perplexity.ai",
-                apps: {
-                    ios: "https://apps.apple.com/app/perplexity-ask-anything/id6714467650",
-                    android: "https://play.google.com/store/apps/details?id=ai.perplexity.app.android"
-                }
-            },
-            {
-                id: 10,
-                name: "Jasper AI",
-                company: "Jasper",
-                type: "text",
-                icon: "✍️",
-                summary: "متخصص في كتابة المحتوى التسويقي والإعلاني",
-                description: "Jasper AI هو أداة ذكاء اصطناعي متخصصة في التسويق بالمحتوى. يوفر قوالب جاهزة لأنواع مختلفة من المحتوى التسويقي.",
-                pros: [
-                    "متخصص في التسويق",
-                    "قوالب جاهزة متنوعة",
-                    "يدعم أكثر من 25 لغة",
-                    "يتكامل مع أدوات أخرى",
-                    "جودة كتابة عالية"
-                ],
-                cons: [
-                    "مكلف جداً",
-                    "لا توجد نسخة مجانية",
-                    "موجه للشركات فقط",
-                    "قد يكون مبالغاً للاستخدام الشخصي"
-                ],
-                bestFor: "المسوقين، أصحاب الأعمال، وكالات التسويق، صناع المحتوى المحترفين",
-                website: "https://www.jasper.ai",
-                apps: {
-                    ios: "متوفر عبر المتصفح",
-                    android: "متوفر عبر المتصفح"
-                }
-            },
-            {
-                id: 11,
-                name: "Grok",
-                company: "xAI (Twitter)",
-                type: "text",
-                icon: "𝕏",
-                summary: "نموذج من إيلون ماسك متكامل مع منصة X",
-                description: "Grok هو نموذج ذكاء اصطناعي من شركة xAI التابعة لإيلون ماسك. يتميز بشخصية مرحة وإمكانية الوصول لبيانات X (تويتر) الفورية.",
-                pros: [
-                    "وصول فوري لأخبار X",
-                    "شخصية مرحة وغير رسمية",
-                    "معلومات حديثة جداً",
-                    "لا يوجد رقابة مشددة",
-                    "مدمج في منصة X"
-                ],
-                cons: [
-                    "يتطلب اشتراك X Premium+",
-                    "مكلف (16$/شهر)",
-                    "متاح لمناطق محدودة",
-                    "أحياناً غير دقيق"
-                ],
-                bestFor: "مستخدمي X المتقدمين، المهتمين بالأخبار الفورية",
-                website: "https://x.ai",
-                apps: {
-                    ios: "عبر تطبيق X",
-                    android: "عبر تطبيق X"
-                }
-            },
-            {
-                id: 12,
-                name: "Poe",
-                company: "Quora",
-                type: "text",
-                icon: "🌐",
-                summary: "منصة توفر الوصول لعدة نماذج ذكاء في مكان واحد",
-                description: "Poe من Quora هو منصة تجمع عدة نماذج ذكاء اصطناعي في تطبيق واحد. يمكنك التبديل بين GPT-4 وClaude وغيرها بسهولة.",
-                pros: [
-                    "وصول لعدة نماذج في مكان واحد",
-                    "واجهة موحدة وسهلة",
-                    "حصة مجانية يومية",
-                    "يمكن إنشاء بوتات مخصصة",
-                    "تطبيق ممتاز للموبايل"
-                ],
-                cons: [
-                    "الاشتراك مكلف للاستخدام الكثيف",
-                    "الحصة المجانية محدودة",
-                    "بعض النماذج المتقدمة مدفوعة"
-                ],
-                bestFor: "من يريد تجربة نماذج متعددة، المطورين، المستخدمين المكثفين",
-                website: "https://poe.com",
-                apps: {
-                    ios: "https://apps.apple.com/app/poe-fast-ai-chat/id1640745955",
-                    android: "https://play.google.com/store/apps/details?id=com.quora.poe"
-                }
-            },
-            {
-                id: 13,
-                name: "Character.AI",
-                company: "Character Technologies",
-                type: "text",
-                icon: "🎭",
-                summary: "تحدث مع شخصيات AI أو أنشئ شخصياتك الخاصة",
-                description: "Character.AI يتيح لك المحادثة مع شخصيات مختلفة من ذكاء اصطناعي، س��اء تاريخية أو خيالية أو مخصصة. ممتع وتعليمي في نفس الوقت.",
-                pros: [
-                    "مجاني بالكامل",
-                    "ملايين الشخصيات المتنوعة",
-                    "إنشاء شخصيات مخصصة",
-                    "محادثات طبيعية وممتعة",
-                    "مجتمع نشط"
-                ],
-                cons: [
-                    "أحياناً تتكرر الإجابات",
-                    "ليس مناسباً للعمل الجاد",
-                    "قد يكون مشتتاً للتركيز",
-                    "محتوى مفلتر بشدة"
-                ],
-                bestFor: "الترفيه، تعلم اللغات، الكتابة الإبداعية، المحادثات الممتعة",
-                website: "https://character.ai",
-                apps: {
-                    ios: "https://apps.apple.com/app/character-ai-ai-chat/id6447852986",
-                    android: "https://play.google.com/store/apps/details?id=ai.character.app"
-                }
-            },
-            {
-                id: 14,
-                name: "Runway",
-                company: "Runway ML",
-                type: "video",
-                icon: "🎬",
-                summary: "الرائد في توليد وتحرير الفيديو بالذكاء الاصطناعي",
-                description: "Runway هو منصة متقدمة لإنشاء وتحرير الفيديو باستخدام الذكاء الاصطناعي. يوفر أدوات قوية لتوليد الفيديو من النص أو الصور.",
-                pros: [
-                    "توليد فيديو من نص أو صورة",
-                    "أدوات تحرير متقدمة",
-                    "إزالة خلفيات الفيديو",
-                    "جودة فيديو ممتازة",
-                    "واجهة احترافية"
-                ],
-                cons: [
-                    "مكلف للاستخدام المكثف",
-                    "يتطلب معالجة وقت",
-                    "الحصة المجانية محدودة جداً",
-                    "معقد للمبتدئين"
-                ],
-                bestFor: "صناع المحتوى، مصممي الفيديو، المسوقين، المخرجين",
-                website: "https://runwayml.com",
-                apps: {
-                    ios: "https://apps.apple.com/app/runway-ai-video-editor/id1665024375",
-                    android: "متوفر عبر المتصفح"
-                }
-            },
-            {
-                id: 15,
-                name: "ElevenLabs",
-                company: "ElevenLabs",
-                type: "audio",
-                icon: "🎙️",
-                summary: "الأفضل في توليد الصوت البشري الواقعي بجودة عالية",
-                description: "ElevenLabs متخصص في تحويل النص إلى كلام بأصوات واقعية جداً. يدعم عدة لغات ويمكن استنساخ الأصوات.",
-                pros: [
-                    "جودة صوت واقعية بشكل مذهل",
-                    "يدعم أكثر من 30 لغة",
-                    "استنساخ الصوت",
-                    "مكتبة أصوات ضخمة",
-                    "واجهة سهلة الاستخدام"
-                ],
-                cons: [
-                    "الحصة المجانية محدودة (10k حرف/شهر)",
-                    "الاشتراك المدفوع مكلف",
-                    "قد يُساء استخدامه",
-                    "بعض اللغات أقل جودة"
-                ],
-                bestFor: "صناع المحتوى، اليوتيوبرز، منشئي البودكاست، المعلقين الصوتيين",
-                website: "https://elevenlabs.io",
-                apps: {
-                    ios: "https://apps.apple.com/app/elevenlabs-ai-voice-generator/id6479373534",
-                    android: "https://play.google.com/store/apps/details?id=io.elevenlabs.app"
-                }
-            }
-        ];
-
-        // Create AI Card
-        function createAICard(ai) {
-            return `
-                <div class="card card-gradient rounded-2xl p-6 shadow-lg dark:shadow-purple-900/20 border border-purple-200 dark:border-purple-800" data-type="${ai.type}" data-id="${ai.id}">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-3">
-                            <span class="text-4xl">${ai.icon}</span>
-                            <div>
-                                <h3 class="text-xl font-bold gradient-text">${ai.name}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-400">${ai.company}</p>
-                            </div>
-                        </div>
-                        <span class="tag text-white text-xs px-3 py-1 rounded-full font-semibold">${getTypeLabel(ai.type)}</span>
-                    </div>
-
-                    <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">${ai.summary}</p>
-
-                    <button onclick="toggleExpand(${ai.id})" class="w-full gradient-bg text-white px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition text-base">
-                        <span id="btn-text-${ai.id}">عرض التفاصيل 👇</span>
-                    </button>
-
-                    <div id="expand-${ai.id}" class="expand-content mt-4">
-                        <div class="space-y-4">
-                            <!-- الشرح المفصل -->
-                            <div class="bg-white dark:bg-gray-800/50 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg gradient-text mb-2">📖 الشرح المفصل</h4>
-                                <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">${ai.description}</p>
-                            </div>
-
-                            <!-- الإيجابيات -->
-                            <div class="pros-cons pros bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-green-600 dark:text-green-400 mb-2">✅ الإيجابيات</h4>
-                                <ul class="space-y-1 text-sm">
-                                    ${ai.pros.map(pro => `<li class="text-gray-700 dark:text-gray-300">• ${pro}</li>`).join('')}
-                                </ul>
-                            </div>
-
-                            <!-- السلبيات -->
-                            <div class="pros-cons cons bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-red-600 dark:text-red-400 mb-2">⚠️ السلبيات</h4>
-                                <ul class="space-y-1 text-sm">
-                                    ${ai.cons.map(con => `<li class="text-gray-700 dark:text-gray-300">• ${con}</li>`).join('')}
-                                </ul>
-                            </div>
-
-                            <!-- لمن يُنصح به -->
-                            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
-                                <h4 class="font-bold text-lg text-purple-600 dark:text-purple-400 mb-2">🎯 مثالي لـ</h4>
-                                <p class="text-sm text-gray-700 dark:text-gray-300">${ai.bestFor}</p>
-                            </div>
-
-                            <!-- الروابط -->
-                            <div class="space-y-3">
-                                <a href="${ai.website}" target="_blank" class="block w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold transition text-center text-base">
-                                    🌐 زيارة الموقع
-                                </a>
-                                ${ai.apps.ios !== 'متوفر عبر المتصفح' && ai.apps.ios !== 'متوفر عبر المتصفح فقط' && !ai.apps.ios.includes('يعمل عبر') && !ai.apps.ios.includes('يتطلب') ?
-                                    `<a href="${ai.apps.ios}" target="_blank" class="block w-full bg-gray-800 hover:bg-gray-900 text-white px-4 py-3 rounded-lg font-semibold transition text-center text-base">
-                                        📱 تحميل من App Store
-                                    </a>` :
-                                    `<div class="block w-full bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-4 py-3 rounded-lg font-semibold text-center text-base">
-                                        📱 iOS: ${ai.apps.ios}
-                                    </div>`
-                                }
-                                ${ai.apps.android !== 'متوفر عبر المتصفح' && ai.apps.android !== 'متوفر عبر المتصفح فقط' && !ai.apps.android.includes('يعمل عبر') && !ai.apps.android.includes('متوفر عبر') && !ai.apps.android.includes('يتطلب') ?
-                                    `<a href="${ai.apps.android}" target="_blank" class="block w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-semibold transition text-center text-base">
-                                        🤖 تحميل من Google Play
-                                    </a>` :
-                                    `<div class="block w-full bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-4 py-3 rounded-lg font-semibold text-center text-base">
-                                        🤖 Android: ${ai.apps.android}
-                                    </div>`
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Get Type Label in Arabic
-        function getTypeLabel(type) {
-            const labels = {
-                'text': '📝 نصوص',
-                'image': '🖼️ صور',
-                'video': '🎬 فيديو',
-                'audio': '🎙️ صوت'
-            };
-            return labels[type] || type;
-        }
-
-        // Toggle Expand/Collapse
-        function toggleExpand(id) {
-            const content = document.getElementById(`expand-${id}`);
-            const btnText = document.getElementById(`btn-text-${id}`);
-
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                btnText.textContent = 'عرض التفاصيل 👇';
-            } else {
-                content.classList.add('active');
-                btnText.textContent = 'إخفاء التفاصيل 👆';
+        // إنشاء تأثير الجسيمات المتحركة
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // مواضع عشوائية
+                const left = Math.random() * 100;
+                const animationDuration = 15 + Math.random() * 10;
+                const animationDelay = Math.random() * 15;
+                const size = 1 + Math.random() * 2;
+                
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particlesContainer.appendChild(particle);
             }
         }
-
-        // Filter AI Models
-        function filterAI(type) {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (type === 'all' || card.dataset.type === type) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Search Functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
-
-            cards.forEach(card => {
-                const id = parseInt(card.dataset.id);
-                const ai = aiModels.find(model => model.id === id);
-                const searchableText = `${ai.name} ${ai.company} ${ai.summary} ${ai.description}`.toLowerCase();
-
-                if (searchableText.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+        
+        // تشغيل تأثير الجسيمات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        // تأثير التمرير السلس للروابط
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
             });
         });
-
-        // Render all AI cards
-        function renderAICards() {
-            const container = document.getElementById('aiContainer');
-            container.innerHTML = aiModels.map(ai => createAICard(ai)).join('');
-        }
-
-        // Initialize
-        renderAICards();
     </script>
 </body>
 </html>
