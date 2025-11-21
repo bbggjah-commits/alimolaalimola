@@ -1,104 +1,75 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هدية من مصطفى</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-        }
-        
-        .image-container {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #fff;
-            border-radius: 8px;
-        }
-        
-        .message {
-            margin: 30px 0;
-            line-height: 1.6;
-        }
-        
-        .name {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
-        }
-        
-        .gift-from {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            color: #fff;
-        }
-        
-        .date {
-            font-size: 1.2rem;
-            margin-top: 15px;
-            color: #ccc;
-        }
-        
-        @media (max-width: 600px) {
-            .name {
-                font-size: 1.8rem;
-            }
-            
-            .gift-from {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>موقع خارق الجمال</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+    }
+    header {
+      padding: 2rem 1rem;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0 0 0.5rem 0;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin: 0;
+      opacity: 0.85;
+    }
+    .container {
+      max-width: 900px;
+      margin: 3rem auto;
+      background: rgba(255,255,255,0.15);
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      backdrop-filter: blur(7px);
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: #2575fc;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      margin: 2rem 0 0 0;
+      text-decoration: none;
+      box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+      transition: 0.2s;
+    }
+    .cta-btn:hover {
+      background: #2575fc;
+      color: #fff;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      header h1 {font-size: 2rem;}
+      .container {padding: 1rem;}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="image-container">
-            <img src="https://g.top4top.io/p_3610t709x0.jpg" alt="صورة الهدية">
-        </div>
-        
-        <div class="message">
-            <div class="name">رضا وسام حسن</div>
-            <div class="gift-from">هدية من أخوك الكبير مصطفى</div>
-            <div class="date">بتاريخ: <span id="current-date"></span></div>
-        </div>
-    </div>
-
-    <script>
-        // إضافة التاريخ الحالي تلقائياً
-        document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString('ar-EG', options);
-            document.getElementById('current-date').textContent = dateString;
-        });
-    </script>
+  <header>
+    <h1>مرحبا بك في موقعي ⚡</h1>
+    <p>تصميم عصري، تفاعل جذاب وسهولة استخدام</p>
+  </header>
+  <div class="container">
+    <h2>لماذا هذا الموقع؟</h2>
+    <p>لأنه ممزوج بالإبداع والتقنيات الحديثة ويعكس احترافية التصاميم المستقبلية.</p>
+    <a class="cta-btn" href="#">ابدأ الآن</a>
+  </div>
 </body>
 </html>
