@@ -1,75 +1,885 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>موقع خارق الجمال</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
-      color: #fff;
-    }
-    header {
-      padding: 2rem 1rem;
-      text-align: center;
-      background: rgba(0,0,0,0.3);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 3rem;
-      margin: 0 0 0.5rem 0;
-    }
-    header p {
-      font-size: 1.3rem;
-      margin: 0;
-      opacity: 0.85;
-    }
-    .container {
-      max-width: 900px;
-      margin: 3rem auto;
-      background: rgba(255,255,255,0.15);
-      border-radius: 18px;
-      padding: 2rem 1.5rem;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-      backdrop-filter: blur(7px);
-    }
-    .cta-btn {
-      display: inline-block;
-      background: #fff;
-      color: #2575fc;
-      font-weight: 700;
-      padding: 1rem 2.5rem;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      margin: 2rem 0 0 0;
-      text-decoration: none;
-      box-shadow: 0 3px 18px rgba(0,0,0,0.08);
-      transition: 0.2s;
-    }
-    .cta-btn:hover {
-      background: #2575fc;
-      color: #fff;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.12);
-      cursor: pointer;
-    }
-    @media (max-width: 600px) {
-      header h1 {font-size: 2rem;}
-      .container {padding: 1rem;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doorver - Professional Roblox Executor & Script Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #000000;
+            --primary-white: #FFFFFF;
+            --secondary-gray: #F5F5F5;
+            --accent-gray: #E0E0E0;
+            --text-dark: #1A1A1A;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--primary-white);
+            border-bottom: 1px solid var(--accent-gray);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-decoration: none;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--primary-black) 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-white);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-black);
+            transition: width var(--transition-speed) ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-black);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-white) 0%, var(--secondary-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 10;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--primary-black);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #1a1a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-white);
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background-color: var(--primary-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--primary-black);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-black);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--accent-gray);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-white);
+            border-color: var(--primary-black);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-black);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background-color: var(--secondary-gray);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background-color: var(--primary-white);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-black);
+            transition: all var(--transition-speed) ease;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .service-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .service-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-black);
+        }
+
+        .service-item p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: var(--secondary-gray);
+            color: var(--primary-black);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--accent-gray);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tag:hover {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+        }
+
+        /* Download Section */
+        .download {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-black) 0%, #1a1a1a 100%);
+            color: var(--primary-white);
+            text-align: center;
+        }
+
+        .download-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .security-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .security-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .security-item h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .security-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Expandable Download Slots */
+        .download-slots {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .slot-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .slot-card:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .slot-card.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-white);
+        }
+
+        .slot-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .slot-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-black);
+            color: var(--primary-white);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary-white);
+            text-decoration: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-features {
+                grid-template-columns: 1fr;
+            }
+
+            .download-slots {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: currentColor;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>مرحبا بك في موقعي ⚡</h1>
-    <p>تصميم عصري، تفاعل جذاب وسهولة استخدام</p>
-  </header>
-  <div class="container">
-    <h2>لماذا هذا الموقع؟</h2>
-    <p>لأنه ممزوج بالإبداع والتقنيات الحديثة ويعكس احترافية التصاميم المستقبلية.</p>
-    <a class="cta-btn" href="#">ابدأ الآن</a>
-  </div>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo-container">
+            <div class="logo-icon">D</div>
+            <span>Doorver</span>
+        </a>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Doorver Executor</h1>
+            <p>Professional Roblox Script Execution Platform with Enterprise-Grade Security and Performance</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('download')">Download Now</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('features')">Learn More</button>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7;">Trusted by thousands of developers worldwide</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose Doorver?</h2>
+        <div class="features-grid">
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized execution engine delivers blazing-fast script performance with minimal latency and maximum efficiency.</p>
+            </div>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>Military-grade encryption and advanced security protocols ensure your scripts and data remain completely protected.</p>
+            </div>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">🎨</div>
+                <h3>Beautiful UI/GUI</h3>
+                <p>Stunning interface design with smooth animations and intuitive controls for the best user experience.</p>
+            </div>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">📱</div>
+                <h3>Cross-Platform</h3>
+                <p>Seamlessly works across multiple platforms with consistent performance and reliability.</p>
+            </div>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">🚀</div>
+                <h3>Easy to Use</h3>
+                <p>Intuitive interface designed for both beginners and advanced developers with comprehensive documentation.</p>
+            </div>
+            <div class="feature-card scroll-reveal">
+                <div class="feature-icon">🔄</div>
+                <h3>Regular Updates</h3>
+                <p>Continuous improvements and new features added regularly to keep you ahead of the curve.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <h2 class="section-title">Our Services</h2>
+            
+            <div class="service-item scroll-reveal">
+                <h3>Lua & Luau Script Development</h3>
+                <p>Professional script development services using Lua and Luau languages. Our expert developers create custom scripts tailored to your specific needs, from simple utilities to complex game modifications. We ensure code quality, performance optimization, and full compatibility with Roblox ecosystem.</p>
+                <div class="service-tags">
+                    <span class="tag">Lua</span>
+                    <span class="tag">Luau</span>
+                    <span class="tag">Custom Development</span>
+                    <span class="tag">Optimization</span>
+                    <span class="tag">Debugging</span>
+                </div>
+            </div>
+
+            <div class="service-item scroll-reveal">
+                <h3>UI/GUI Design & Development</h3>
+                <p>Create stunning and elegant user interfaces for your Roblox games and applications. Our design team specializes in crafting beautiful, responsive GUIs that enhance user experience. We combine modern design principles with technical excellence to deliver interfaces that are both visually appealing and functionally superior.</p>
+                <div class="service-tags">
+                    <span class="tag">UI Design</span>
+                    <span class="tag">GUI Development</span>
+                    <span class="tag">UX Optimization</span>
+                    <span class="tag">Responsive Design</span>
+                    <span class="tag">Animation</span>
+                </div>
+            </div>
+
+            <div class="service-item scroll-reveal">
+                <h3>Script Execution & Deployment</h3>
+                <p>Reliable and secure script execution platform with advanced deployment capabilities. Our infrastructure ensures maximum uptime, minimal latency, and complete security for your scripts. Enjoy seamless integration with your workflow and comprehensive monitoring tools.</p>
+                <div class="service-tags">
+                    <span class="tag">Execution Engine</span>
+                    <span class="tag">Deployment</span>
+                    <span class="tag">Monitoring</span>
+                    <span class="tag">Security</span>
+                    <span class="tag">Support</span>
+                </div>
+            </div>
+
+            <div class="service-item scroll-reveal">
+                <h3>Consulting & Support</h3>
+                <p>Expert consulting services for your scripting projects. Our experienced team provides guidance on best practices, architecture design, and performance optimization. We offer comprehensive support to ensure your projects succeed from conception to deployment.</p>
+                <div class="service-tags">
+                    <span class="tag">Consulting</span>
+                    <span class="tag">Architecture</span>
+                    <span class="tag">Best Practices</span>
+                    <span class="tag">24/7 Support</span>
+                    <span class="tag">Training</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="download-content">
+            <h2>Download Doorver Executor</h2>
+            <p>Get access to the most powerful and reliable Roblox script execution platform available today</p>
+            
+            <div class="security-features">
+                <div class="security-item">
+                    <h4>🔐 Secure Download</h4>
+                    <p>All downloads are encrypted and verified with digital signatures</p>
+                </div>
+                <div class="security-item">
+                    <h4>✅ Virus Scanned</h4>
+                    <p>Every release is thoroughly scanned by multiple antivirus engines</p>
+                </div>
+                <div class="security-item">
+                    <h4>📊 Trusted</h4>
+                    <p>Millions of downloads with zero security incidents</p>
+                </div>
+                <div class="security-item">
+                    <h4>⚙️ Optimized</h4>
+                    <p>Lightweight and fast with minimal system resource usage</p>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="margin-top: 2rem; font-size: 1.1rem; padding: 1.2rem 3rem;">Download Latest Version</button>
+
+            <div class="download-slots">
+                <div class="slot-card active">
+                    <h4>Executor v1.0</h4>
+                    <p>Latest stable release with full features</p>
+                </div>
+                <div class="slot-card">
+                    <h4>Future Release</h4>
+                    <p>Coming soon with enhanced features</p>
+                </div>
+                <div class="slot-card">
+                    <h4>Expansion Slot</h4>
+                    <p>Ready for new executor versions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Documentation</a>
+                <a href="#">Discord Community</a>
+                <a href="#">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Doorver. All rights reserved. Professional Script Development & Execution Services.</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Crafted with precision for the Roblox development community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll to section function
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth navbar animation on scroll
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('nav');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Active navigation link highlighting
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--primary-black)';
+                    link.style.fontWeight = '700';
+                } else {
+                    link.style.color = 'var(--text-dark)';
+                    link.style.fontWeight = '500';
+                }
+            });
+        });
+
+        // Download slot interaction
+        const slotCards = document.querySelectorAll('.slot-card');
+        slotCards.forEach(card => {
+            card.addEventListener('click', function() {
+                slotCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Button ripple effect
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+
+        // Prevent initial opacity issue
+        document.body.style.opacity = '1';
+    </script>
 </body>
 </html>
