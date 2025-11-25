@@ -1,736 +1,419 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doorver - Professional Roblox Executor & Scripting Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>VNDXS Group</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary-color: #ffffff;
-            --secondary-color: #000000;
-            --accent-color: #f0f0f0;
-            --text-color: #333333;
-            --transition: all 0.3s ease;
+        .font-arabic { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .dir-rtl { direction: rtl; }
+        .dir-ltr { direction: ltr; }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        body {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        @keyframes fade-in-down {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-decoration: none;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            font-size: 28px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 150px 0 100px;
-            text-align: center;
-            background-color: var(--accent-color);
-            border-radius: 0 0 30px 30px;
-            margin-top: 80px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: var(--text-color);
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-
-        /* Executors Section */
-        .executors {
-            padding: 100px 0;
-            background-color: var(--accent-color);
-            border-radius: 30px;
-        }
-
-        .executors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .executor-card {
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .executor-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: var(--secondary-color);
-        }
-
-        .executor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .executor-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .executor-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-
-        .executor-card p {
-            margin-bottom: 20px;
-        }
-
-        /* Scripting Services Section */
-        .services {
-            padding: 100px 0;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-
-        /* Example Section */
-        .example {
-            padding: 100px 0;
-            background-color: var(--accent-color);
-            border-radius: 30px;
-        }
-
-        .example-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .example-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .example-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .example-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .example-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .example-image img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary-color);
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #cccccc;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #cccccc;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary-color);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-        }
+        .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+        .animate-fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <i class="fas fa-door-open"></i>
-                    Doorver
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#executors">Executors</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#example">Examples</a></li>
-                    <li><a href="#download" class="btn">Download</a></li>
-                </ul>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
+<body class="bg-black">
+    <div id="root"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Professional Roblox Executor</h1>
-            <p>Doorver offers a secure, reliable, and powerful executor for Roblox with advanced features and regular updates. Experience seamless scripting with our intuitive platform.</p>
-            <a href="#download" class="btn">Download Now</a>
-        </div>
-    </section>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { 
+            Code, Cpu, ShieldCheck, Users, Zap, Send, MessageSquare, 
+            Mail, Copy, Check, X, CreditCard, FileText 
+        } = lucideReact;
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose Doorver?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>High Security</h3>
-                    <p>Our executor is equipped with advanced security features to ensure your account remains safe while using scripts.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Experience unparalleled execution speed with our optimized performance engine for seamless gameplay.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-sync"></i>
-                    </div>
-                    <h3>Regular Updates</h3>
-                    <p>We continuously update our executor to ensure compatibility with the latest Roblox updates and features.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        const App = () => {
+            const [isTermsOpen, setIsTermsOpen] = useState(false);
+            const [discordCopied, setDiscordCopied] = useState(false);
+            const [mounted, setMounted] = useState(false);
 
-    <!-- Executors Section -->
-    <section class="executors" id="executors">
-        <div class="container">
-            <h2 class="section-title">Our Executors</h2>
-            <div class="executors-grid">
-                <div class="executor-card">
-                    <div class="executor-icon">
-                        <i class="fas fa-download"></i>
-                    </div>
-                    <h3>Doorver Basic</h3>
-                    <p>Our free version with essential features for beginners and casual script users.</p>
-                    <a href="#" class="btn">Download</a>
-                </div>
-                <div class="executor-card">
-                    <div class="executor-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>Doorver Pro</h3>
-                    <p>Advanced features, priority support, and exclusive scripts for power users.</p>
-                    <a href="#" class="btn">Download</a>
-                </div>
-                <div class="executor-card">
-                    <div class="executor-icon">
-                        <i class="fas fa-infinity"></i>
-                    </div>
-                    <h3>Doorver Ultimate</h3>
-                    <p>All Pro features plus lifetime updates and access to our premium script library.</p>
-                    <a href="#" class="btn">Download</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            useEffect(() => {
+                setMounted(true);
+            }, []);
 
-    <!-- Scripting Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Scripting Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Lua Scripting</h3>
-                    <p>Custom Lua scripts tailored to your specific needs for enhanced Roblox gameplay.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Luau Development</h3>
-                    <p>Advanced Luau scripting for complex game mechanics and optimized performance.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>UI/UX Design</h3>
-                    <p>Beautiful and intuitive user interfaces designed to enhance user experience.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <h3>GUI Creation</h3>
-                    <p>Custom graphical user interfaces with advanced functionality and modern aesthetics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            const copyDiscord = () => {
+                const discordUser = "1_ing1";
+                navigator.clipboard.writeText(discordUser).then(() => {
+                    setDiscordCopied(true);
+                    setTimeout(() => setDiscordCopied(false), 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            };
 
-    <!-- Example Section -->
-    <section class="example" id="example">
-        <div class="container">
-            <h2 class="section-title">Script Example</h2>
-            <div class="example-content">
-                <div class="example-text">
-                    <h3>Modern GUI Script</h3>
-                    <p>This example showcases a beautifully designed GUI created with our scripting services. The interface features smooth animations, intuitive navigation, and a modern aesthetic that enhances user experience.</p>
-                    <p>Our team specializes in creating custom GUIs that are both functional and visually appealing, ensuring your Roblox experience is elevated to the next level.</p>
-                    <a href="#" class="btn">Request a Custom Script</a>
-                </div>
-                <div class="example-image">
-                    <!-- Placeholder for GUI image -->
-                    <div style="background: linear-gradient(135deg, #f5f5f5, #e0e0e0); width: 100%; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-                        <i class="fas fa-image" style="font-size: 50px; margin-right: 15px;"></i>
-                        GUI Script Preview
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Doorver</h3>
-                    <p>Professional Roblox executor and scripting services provider with a focus on security, reliability, and user experience.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#executors">Executors</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#example">Examples</a></li>
-                        <li><a href="#download">Download</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Status</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Doorver. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
+            const features = [
+                {
+                    id: 1,
+                    icon: React.createElement(Code, { className: "w-8 h-8 text-blue-400" }),
+                    title: "تطوير متخصص",
+                    desc: "مبرمج متخصص في تطوير الويب والتطبيقات بأحدث المعايير."
+                },
+                {
+                    id: 2,
+                    icon: React.createElement(Cpu, { className: "w-8 h-8 text-indigo-400" }),
+                    title: "تقنيات المستقبل",
+                    desc: "خبرة عميقة في التقنيات الحديثة والمستقبلية لضمان الريادة."
+                },
+                {
+                    id: 3,
+                    icon: React.createElement(Zap, { className: "w-8 h-8 text-yellow-300" }),
+                    title: "جودة وابتكار",
+                    desc: "التزام صارم بالجودة والابتكار المستمر في كل سطر برمجي."
+                },
+                {
+                    id: 4,
+                    icon: React.createElement(Users, { className: "w-8 h-8 text-cyan-400" }),
+                    title: "فريق متخصص",
+                    desc: "فريق متخصص في VNDXS Group يعمل بتناغم لتحقيق الرؤية."
+                },
+                {
+                    id: 5,
+                    icon: React.createElement(ShieldCheck, { className: "w-8 h-8 text-emerald-400" }),
+                    title: "جاهزية للتعاون",
+                    desc: "جاهزون للتعاون الفوري والعمل على مشاريع جديدة ومبتكرة."
                 }
-            });
-        });
+            ];
 
-        // Animation on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.feature-card, .executor-card, .service-card');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.style.opacity = "1";
-                    element.style.transform = "translateY(0)";
-                }
-            });
-        }
+            return React.createElement('div', {
+                className: `min-h-screen bg-black text-white overflow-x-hidden dir-rtl font-arabic relative selection:bg-blue-600 selection:text-white ${mounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-700`
+            }, [
+                React.createElement('div', {
+                    key: 'bg',
+                    className: 'fixed top-0 left-0 w-full h-full pointer-events-none z-0'
+                }, [
+                    React.createElement('div', {
+                        key: 'bg1',
+                        className: 'absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-[#0a1128] rounded-full blur-[120px] opacity-40 animate-pulse'
+                    }),
+                    React.createElement('div', {
+                        key: 'bg2',
+                        className: 'absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-[#1e40af] rounded-full blur-[100px] opacity-20'
+                    })
+                ]),
 
-        // Set initial state for animation
-        window.addEventListener('load', function() {
-            const elements = document.querySelectorAll('.feature-card, .executor-card, .service-card');
-            elements.forEach(element => {
-                element.style.opacity = "0";
-                element.style.transform = "translateY(20px)";
-                element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-            });
-            
-            // Trigger animation on scroll
-            window.addEventListener('scroll', animateOnScroll);
-            // Trigger once on load
-            animateOnScroll();
-        });
+                React.createElement('div', {
+                    key: 'content',
+                    className: 'relative z-10 container mx-auto px-6 py-12 flex flex-col items-center justify-center min-h-screen'
+                }, [
+                    // Header
+                    React.createElement('header', {
+                        key: 'header',
+                        className: 'flex flex-col items-center mb-16 text-center animate-fade-in-down'
+                    }, [
+                        React.createElement('div', {
+                            key: 'logo',
+                            className: 'relative group mb-8'
+                        }, [
+                            React.createElement('div', {
+                                key: 'glow',
+                                className: 'absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200'
+                            }),
+                            React.createElement('img', {
+                                key: 'img',
+                                src: 'https://g.top4top.io/p_36155s9os0.jpg',
+                                alt: 'VNDXS Logo',
+                                className: 'relative w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-white/10 shadow-2xl object-cover transform transition duration-500 hover:scale-105'
+                            }),
+                            React.createElement('div', {
+                                key: 'overlay',
+                                className: 'absolute inset-0 rounded-full ring-2 ring-blue-500/20 animate-pulse'
+                            })
+                        ]),
+                        React.createElement('h1', {
+                            key: 'title',
+                            className: 'text-5xl md:text-7xl font-bold font-orbitron tracking-wider mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500'
+                        }, 'VNDXS Group'),
+                        React.createElement('p', {
+                            key: 'subtitle',
+                            className: 'text-xl md:text-2xl text-gray-400 font-light tracking-wide animate-fade-in-up delay-200'
+                        }, 'نحن نبني المستقبل')
+                    ]),
+
+                    // Features
+                    React.createElement('section', {
+                        key: 'features',
+                        className: 'w-full max-w-5xl mb-20'
+                    }, 
+                        React.createElement('div', {
+                            className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+                        }, 
+                            features.map((feature, idx) => 
+                                React.createElement('div', {
+                                    key: feature.id,
+                                    className: 'group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start',
+                                    style: { animationDelay: `${idx * 100}ms` }
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'icon',
+                                        className: 'mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-blue-500/30 transition-colors'
+                                    }, feature.icon),
+                                    React.createElement('h3', {
+                                        key: 'feature-title',
+                                        className: 'text-xl font-bold mb-2 text-gray-100 group-hover:text-white'
+                                    }, feature.title),
+                                    React.createElement('p', {
+                                        key: 'feature-desc',
+                                        className: 'text-gray-400 text-sm leading-relaxed'
+                                    }, feature.desc),
+                                    React.createElement('div', {
+                                        key: 'corner',
+                                        className: 'absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl'
+                                    }, [
+                                        React.createElement('div', {
+                                            key: 'line1',
+                                            className: 'absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+                                        }),
+                                        React.createElement('div', {
+                                            key: 'line2',
+                                            className: 'absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+                                        })
+                                    ])
+                                ])
+                            )
+                        )
+                    ),
+
+                    // Contact Section
+                    React.createElement('section', {
+                        key: 'contact',
+                        className: 'w-full max-w-2xl text-center mb-16'
+                    }, [
+                        React.createElement('div', {
+                            key: 'buttons',
+                            className: 'flex flex-wrap justify-center gap-4'
+                        }, [
+                            // Telegram
+                            React.createElement('a', {
+                                key: 'telegram',
+                                href: 'https://t.me/UING10',
+                                target: '_blank',
+                                rel: 'noopener noreferrer',
+                                className: 'flex items-center gap-3 px-8 py-4 bg-[#0088cc]/10 text-[#0088cc] border border-[#0088cc]/30 rounded-xl hover:bg-[#0088cc] hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,136,204,0.4)] hover:scale-105'
+                            }, [
+                                React.createElement(Send, { key: 'send-icon', className: "w-5 h-5" }),
+                                React.createElement('span', { key: 'telegram-text', className: "font-semibold font-inter" }, "Telegram")
+                            ]),
+
+                            // Discord
+                            React.createElement('button', {
+                                key: 'discord',
+                                onClick: copyDiscord,
+                                className: `flex items-center gap-3 px-8 py-4 border rounded-xl transition-all duration-300 hover:scale-105 relative overflow-hidden group ${discordCopied ? 'bg-green-500/20 text-green-400 border-green-500/50 hover:bg-green-500 hover:text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]' : 'bg-[#5865F2]/10 text-[#5865F2] border-[#5865F2]/30 hover:bg-[#5865F2] hover:text-white hover:shadow-[0_0_20px_rgba(88,101,242,0.4)]'}`
+                            }, [
+                                discordCopied ? React.createElement(Check, { key: 'check-icon', className: "w-5 h-5" }) : React.createElement(MessageSquare, { key: 'msg-icon', className: "w-5 h-5" }),
+                                React.createElement('span', { key: 'discord-text', className: "font-semibold font-inter dir-ltr" }, discordCopied ? "تم النسخ!" : "1_ing1"),
+                                !discordCopied && React.createElement('span', {
+                                    key: 'hover-text',
+                                    className: 'absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200'
+                                }, React.createElement('span', { className: 'text-xs text-white font-arabic' }, 'نسخ'))
+                            ]),
+
+                            // Email
+                            React.createElement('a', {
+                                key: 'email',
+                                href: 'mailto:vndxs.group@gmail.com',
+                                className: 'flex items-center gap-3 px-8 py-4 bg-gray-100/10 text-gray-300 border border-white/10 rounded-xl hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105'
+                            }, [
+                                React.createElement(Mail, { key: 'mail-icon', className: "w-5 h-5" }),
+                                React.createElement('span', { key: 'email-text', className: "font-semibold font-inter" }, "Email")
+                            ])
+                        ]),
+                        React.createElement('div', {
+                            key: 'email-display',
+                            className: 'mt-8 text-sm text-gray-500 font-inter'
+                        }, 'vndxs.group@gmail.com')
+                    ]),
+
+                    // Footer
+                    React.createElement('footer', {
+                        key: 'footer',
+                        className: 'w-full text-center border-t border-white/5 pt-8 pb-4'
+                    }, [
+                        React.createElement('p', {
+                            key: 'copyright',
+                            className: 'text-gray-500 text-sm font-arabic mb-2'
+                        }, 'جميع الحقوق محفوظة © 2025 VNDXS Group'),
+                        React.createElement('button', {
+                            key: 'terms-btn',
+                            onClick: () => setIsTermsOpen(true),
+                            className: 'text-gray-600 text-xs hover:text-blue-400 transition-colors flex items-center justify-center gap-1 mx-auto'
+                        }, [
+                            React.createElement(FileText, { key: 'file-icon', className: "w-3 h-3" }),
+                            'شروط الخدمة'
+                        ])
+                    ])
+                ]),
+
+                // Terms Modal
+                isTermsOpen && React.createElement('div', {
+                    key: 'modal',
+                    className: 'fixed inset-0 z-50 flex items-center justify-center p-4'
+                }, [
+                    React.createElement('div', {
+                        key: 'overlay',
+                        className: 'absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity',
+                        onClick: () => setIsTermsOpen(false)
+                    }),
+                    React.createElement('div', {
+                        key: 'modal-content',
+                        className: 'relative bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-fade-in-up'
+                    }, [
+                        // Modal Header
+                        React.createElement('div', {
+                            key: 'modal-header',
+                            className: 'p-6 border-b border-white/10 flex justify-between items-center bg-[#0f0f0f]'
+                        }, [
+                            React.createElement('h2', {
+                                key: 'modal-title',
+                                className: 'text-xl font-bold text-white flex items-center gap-2'
+                            }, [
+                                React.createElement(FileText, { key: 'modal-icon', className: "w-5 h-5 text-blue-500" }),
+                                'شروط الخدمة'
+                            ]),
+                            React.createElement('button', {
+                                key: 'close-btn',
+                                onClick: () => setIsTermsOpen(false),
+                                className: 'text-gray-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full hover:bg-white/10'
+                            }, React.createElement(X, { className: "w-5 h-5" }))
+                        ]),
+
+                        // Modal Content
+                        React.createElement('div', {
+                            key: 'modal-body',
+                            className: 'p-6 max-h-[70vh] overflow-y-auto custom-scrollbar text-right'
+                        }, [
+                            // Payment Methods
+                            React.createElement('div', {
+                                key: 'payment',
+                                className: 'mb-6'
+                            }, [
+                                React.createElement('h3', {
+                                    key: 'payment-title',
+                                    className: 'text-blue-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2'
+                                }, [
+                                    React.createElement(CreditCard, { key: 'card-icon', className: "w-4 h-4" }),
+                                    'طرق الدفع المقبولة'
+                                ]),
+                                React.createElement('ul', {
+                                    key: 'payment-list',
+                                    className: 'space-y-2 text-gray-300 text-sm'
+                                }, [
+                                    React.createElement('li', { key: 'card', className: 'flex items-center gap-2' }, [
+                                        React.createElement('span', { key: 'dot1', className: 'w-1.5 h-1.5 rounded-full bg-blue-500' }),
+                                        'بطاقات الائتمان (Credit Card)'
+                                    ]),
+                                    React.createElement('li', { key: 'asia', className: 'flex items-center gap-2' }, [
+                                        React.createElement('span', { key: 'dot2', className: 'w-1.5 h-1.5 rounded-full bg-blue-500' }),
+                                        'رصيد آسياسيل (Asiacell)'
+                                    ]),
+                                    React.createElement('li', { 
+                                        key: 'note',
+                                        className: 'text-xs text-red-400 mt-2 block bg-red-900/10 p-2 rounded border border-red-900/20'
+                                    }, '* لا توجد طرق دفع أخرى متاحة حالياً.')
+                                ])
+                            ]),
+
+                            // Rejected Content
+                            React.createElement('div', {
+                                key: 'rejected',
+                                className: 'mb-6'
+                            }, [
+                                React.createElement('h3', {
+                                    key: 'rejected-title',
+                                    className: 'text-red-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2'
+                                }, [
+                                    React.createElement(ShieldCheck, { key: 'shield-icon', className: "w-4 h-4" }),
+                                    'المحتوى المرفوض (محظور كلياً)'
+                                ]),
+                                React.createElement('ul', {
+                                    key: 'rejected-list',
+                                    className: 'grid grid-cols-1 gap-2 text-gray-300 text-sm'
+                                }, [
+                                    "المواقع الإباحية",
+                                    "المواقع العنصرية", 
+                                    "مواقع الجندر والمثلية",
+                                    "المواقع السياسية"
+                                ].map((item, i) => 
+                                    React.createElement('li', {
+                                        key: i,
+                                        className: 'flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10'
+                                    }, [
+                                        React.createElement(X, { key: 'x-icon', className: "w-4 h-4 text-red-500" }),
+                                        item
+                                    ])
+                                )
+                                )
+                            ]),
+
+                            // General Policies
+                            React.createElement('div', {
+                                key: 'policies'
+                            }, [
+                                React.createElement('h3', {
+                                    key: 'policies-title',
+                                    className: 'text-gray-400 text-sm font-bold uppercase tracking-wider mb-3'
+                                }, 'السياسات العامة'),
+                                React.createElement('ul', {
+                                    key: 'policies-list',
+                                    className: 'space-y-2 text-gray-400 text-xs'
+                                }, [
+                                    React.createElement('li', { key: 'p1' }, '• عدم المسؤولية عن أخطاء الدفع من طرف العميل.'),
+                                    React.createElement('li', { key: 'p2' }, '• نلتزم بالحفاظ على خصوصية بيانات العملاء بشكل تام.'),
+                                    React.createElement('li', { key: 'p3' }, '• حقوق الملكية الفكرية للمشروع تنتقل للعميل بعد الدفع الكامل.'),
+                                    React.createElement('li', { key: 'p4' }, '• نحتفظ بحق إلغاء أي مشروع يتبين أنه يخالف الشروط أعلاه.')
+                                ])
+                            ])
+                        ]),
+
+                        // Modal Footer
+                        React.createElement('div', {
+                            key: 'modal-footer',
+                            className: 'p-4 border-t border-white/10 bg-[#0f0f0f] text-center'
+                        }, 
+                            React.createElement('button', {
+                                onClick: () => setIsTermsOpen(false),
+                                className: 'w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors'
+                            }, 'فهمت واوافق')
+                        )
+                    ])
+                ])
+            ]);
+        };
+
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
     </script>
 </body>
-                        </html>
+</html>
