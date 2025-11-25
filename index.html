@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VNDXS Group</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/1.28.0/icon-font.min.css" rel="stylesheet">
     
     <style>
         .font-arabic { font-family: 'IBM Plex Sans Arabic', sans-serif; }
@@ -43,377 +40,327 @@
         }
         .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
         .animate-fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
+
+        /* Lucide Icons as CSS */
+        .icon::before {
+            font-family: 'Lucide Icons';
+            display: inline-block;
+        }
+        .icon-code::before { content: '\f121'; }
+        .icon-cpu::before { content: '\f233'; }
+        .icon-shield-check::before { content: '\f531'; }
+        .icon-users::before { content: '\f5b7'; }
+        .icon-zap::before { content: '\f5c7'; }
+        .icon-send::before { content: '\f4c8'; }
+        .icon-message-square::before { content: '\f3a4'; }
+        .icon-mail::before { content: '\f375'; }
+        .icon-check::before { content: '\f12a'; }
+        .icon-x::before { content: '\f5d5'; }
+        .icon-credit-card::before { content: '\f1c9'; }
+        .icon-file-text::before { content: '\f22c'; }
+        .icon-copy::before { content: '\f1c5'; }
     </style>
 </head>
-<body class="bg-black">
-    <div id="root"></div>
+<body class="bg-black text-white font-arabic min-h-screen dir-rtl">
+    <!-- Dynamic Background -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-[#0a1128] rounded-full blur-[120px] opacity-40 animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-[#1e40af] rounded-full blur-[100px] opacity-20"></div>
+    </div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-        const { 
-            Code, Cpu, ShieldCheck, Users, Zap, Send, MessageSquare, 
-            Mail, Copy, Check, X, CreditCard, FileText 
-        } = lucideReact;
+    <div class="relative z-10 container mx-auto px-6 py-12 flex flex-col items-center justify-center min-h-screen">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col items-center mb-16 text-center animate-fade-in-down">
+            <div class="relative group mb-8">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <img 
+                    src="https://g.top4top.io/p_36155s9os0.jpg" 
+                    alt="VNDXS Logo" 
+                    class="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-white/10 shadow-2xl object-cover transform transition duration-500 hover:scale-105"
+                />
+                <div class="absolute inset-0 rounded-full ring-2 ring-blue-500/20 animate-pulse"></div>
+            </div>
 
-        const App = () => {
-            const [isTermsOpen, setIsTermsOpen] = useState(false);
-            const [discordCopied, setDiscordCopied] = useState(false);
-            const [mounted, setMounted] = useState(false);
+            <h1 class="text-5xl md:text-7xl font-bold font-orbitron tracking-wider mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">
+                VNDXS Group
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-400 font-light tracking-wide animate-fade-in-up delay-200">
+                نحن نبني المستقبل
+            </p>
+        </header>
 
-            useEffect(() => {
-                setMounted(true);
-            }, []);
+        <!-- Features Grid -->
+        <section class="w-full max-w-5xl mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start">
+                    <div class="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-blue-500/30 transition-colors">
+                        <i class="icon icon-code w-8 h-8 text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100 group-hover:text-white">تطوير متخصص</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">مبرمج متخصص في تطوير الويب والتطبيقات بأحدث المعايير.</p>
+                    
+                    <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
+                        <div class="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
 
-            const copyDiscord = () => {
-                const discordUser = "1_ing1";
-                navigator.clipboard.writeText(discordUser).then(() => {
-                    setDiscordCopied(true);
-                    setTimeout(() => setDiscordCopied(false), 2000);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
-            };
+                <!-- Feature 2 -->
+                <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start">
+                    <div class="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-indigo-500/30 transition-colors">
+                        <i class="icon icon-cpu w-8 h-8 text-indigo-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100 group-hover:text-white">تقنيات المستقبل</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">خبرة عميقة في التقنيات الحديثة والمستقبلية لضمان الريادة.</p>
+                    
+                    <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
+                        <div class="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-indigo-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-indigo-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
 
-            const features = [
-                {
-                    id: 1,
-                    icon: React.createElement(Code, { className: "w-8 h-8 text-blue-400" }),
-                    title: "تطوير متخصص",
-                    desc: "مبرمج متخصص في تطوير الويب والتطبيقات بأحدث المعايير."
-                },
-                {
-                    id: 2,
-                    icon: React.createElement(Cpu, { className: "w-8 h-8 text-indigo-400" }),
-                    title: "تقنيات المستقبل",
-                    desc: "خبرة عميقة في التقنيات الحديثة والمستقبلية لضمان الريادة."
-                },
-                {
-                    id: 3,
-                    icon: React.createElement(Zap, { className: "w-8 h-8 text-yellow-300" }),
-                    title: "جودة وابتكار",
-                    desc: "التزام صارم بالجودة والابتكار المستمر في كل سطر برمجي."
-                },
-                {
-                    id: 4,
-                    icon: React.createElement(Users, { className: "w-8 h-8 text-cyan-400" }),
-                    title: "فريق متخصص",
-                    desc: "فريق متخصص في VNDXS Group يعمل بتناغم لتحقيق الرؤية."
-                },
-                {
-                    id: 5,
-                    icon: React.createElement(ShieldCheck, { className: "w-8 h-8 text-emerald-400" }),
-                    title: "جاهزية للتعاون",
-                    desc: "جاهزون للتعاون الفوري والعمل على مشاريع جديدة ومبتكرة."
-                }
-            ];
+                <!-- Feature 3 -->
+                <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start">
+                    <div class="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-yellow-500/30 transition-colors">
+                        <i class="icon icon-zap w-8 h-8 text-yellow-300 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100 group-hover:text-white">جودة وابتكار</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">التزام صارم بالجودة والابتكار المستمر في كل سطر برمجي.</p>
+                    
+                    <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
+                        <div class="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-yellow-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-yellow-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
 
-            return React.createElement('div', {
-                className: `min-h-screen bg-black text-white overflow-x-hidden dir-rtl font-arabic relative selection:bg-blue-600 selection:text-white ${mounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-700`
-            }, [
-                React.createElement('div', {
-                    key: 'bg',
-                    className: 'fixed top-0 left-0 w-full h-full pointer-events-none z-0'
-                }, [
-                    React.createElement('div', {
-                        key: 'bg1',
-                        className: 'absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-[#0a1128] rounded-full blur-[120px] opacity-40 animate-pulse'
-                    }),
-                    React.createElement('div', {
-                        key: 'bg2',
-                        className: 'absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-[#1e40af] rounded-full blur-[100px] opacity-20'
-                    })
-                ]),
+                <!-- Feature 4 -->
+                <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start">
+                    <div class="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-cyan-500/30 transition-colors">
+                        <i class="icon icon-users w-8 h-8 text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100 group-hover:text-white">فريق متخصص</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">فريق متخصص في VNDXS Group يعمل بتناغم لتحقيق الرؤية.</p>
+                    
+                    <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
+                        <div class="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
 
-                React.createElement('div', {
-                    key: 'content',
-                    className: 'relative z-10 container mx-auto px-6 py-12 flex flex-col items-center justify-center min-h-screen'
-                }, [
-                    // Header
-                    React.createElement('header', {
-                        key: 'header',
-                        className: 'flex flex-col items-center mb-16 text-center animate-fade-in-down'
-                    }, [
-                        React.createElement('div', {
-                            key: 'logo',
-                            className: 'relative group mb-8'
-                        }, [
-                            React.createElement('div', {
-                                key: 'glow',
-                                className: 'absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200'
-                            }),
-                            React.createElement('img', {
-                                key: 'img',
-                                src: 'https://g.top4top.io/p_36155s9os0.jpg',
-                                alt: 'VNDXS Logo',
-                                className: 'relative w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-white/10 shadow-2xl object-cover transform transition duration-500 hover:scale-105'
-                            }),
-                            React.createElement('div', {
-                                key: 'overlay',
-                                className: 'absolute inset-0 rounded-full ring-2 ring-blue-500/20 animate-pulse'
-                            })
-                        ]),
-                        React.createElement('h1', {
-                            key: 'title',
-                            className: 'text-5xl md:text-7xl font-bold font-orbitron tracking-wider mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500'
-                        }, 'VNDXS Group'),
-                        React.createElement('p', {
-                            key: 'subtitle',
-                            className: 'text-xl md:text-2xl text-gray-400 font-light tracking-wide animate-fade-in-up delay-200'
-                        }, 'نحن نبني المستقبل')
-                    ]),
+                <!-- Feature 5 -->
+                <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start">
+                    <div class="mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-emerald-500/30 transition-colors">
+                        <i class="icon icon-shield-check w-8 h-8 text-emerald-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-100 group-hover:text-white">جاهزية للتعاون</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">جاهزون للتعاون الفوري والعمل على مشاريع جديدة ومبتكرة.</p>
+                    
+                    <div class="absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl">
+                        <div class="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-emerald-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-emerald-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    // Features
-                    React.createElement('section', {
-                        key: 'features',
-                        className: 'w-full max-w-5xl mb-20'
-                    }, 
-                        React.createElement('div', {
-                            className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
-                        }, 
-                            features.map((feature, idx) => 
-                                React.createElement('div', {
-                                    key: feature.id,
-                                    className: 'group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(30,64,175,0.3)] flex flex-col items-start',
-                                    style: { animationDelay: `${idx * 100}ms` }
-                                }, [
-                                    React.createElement('div', {
-                                        key: 'icon',
-                                        className: 'mb-4 p-3 rounded-lg bg-black/40 border border-white/5 group-hover:border-blue-500/30 transition-colors'
-                                    }, feature.icon),
-                                    React.createElement('h3', {
-                                        key: 'feature-title',
-                                        className: 'text-xl font-bold mb-2 text-gray-100 group-hover:text-white'
-                                    }, feature.title),
-                                    React.createElement('p', {
-                                        key: 'feature-desc',
-                                        className: 'text-gray-400 text-sm leading-relaxed'
-                                    }, feature.desc),
-                                    React.createElement('div', {
-                                        key: 'corner',
-                                        className: 'absolute top-0 right-0 w-16 h-16 overflow-hidden rounded-tr-2xl'
-                                    }, [
-                                        React.createElement('div', {
-                                            key: 'line1',
-                                            className: 'absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'
-                                        }),
-                                        React.createElement('div', {
-                                            key: 'line2',
-                                            className: 'absolute top-0 right-0 h-[1px] w-full bg-gradient-to-l from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'
-                                        })
-                                    ])
-                                ])
-                            )
-                        )
-                    ),
+        <!-- Contact Section -->
+        <section class="w-full max-w-2xl text-center mb-16">
+            <div class="flex flex-wrap justify-center gap-4">
+                
+                <!-- Telegram -->
+                <a 
+                    href="https://t.me/UING10" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-3 px-8 py-4 bg-[#0088cc]/10 text-[#0088cc] border border-[#0088cc]/30 rounded-xl hover:bg-[#0088cc] hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,136,204,0.4)] hover:scale-105"
+                >
+                    <i class="icon icon-send w-5 h-5"></i>
+                    <span class="font-semibold font-inter">Telegram</span>
+                </a>
 
-                    // Contact Section
-                    React.createElement('section', {
-                        key: 'contact',
-                        className: 'w-full max-w-2xl text-center mb-16'
-                    }, [
-                        React.createElement('div', {
-                            key: 'buttons',
-                            className: 'flex flex-wrap justify-center gap-4'
-                        }, [
-                            // Telegram
-                            React.createElement('a', {
-                                key: 'telegram',
-                                href: 'https://t.me/UING10',
-                                target: '_blank',
-                                rel: 'noopener noreferrer',
-                                className: 'flex items-center gap-3 px-8 py-4 bg-[#0088cc]/10 text-[#0088cc] border border-[#0088cc]/30 rounded-xl hover:bg-[#0088cc] hover:text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,136,204,0.4)] hover:scale-105'
-                            }, [
-                                React.createElement(Send, { key: 'send-icon', className: "w-5 h-5" }),
-                                React.createElement('span', { key: 'telegram-text', className: "font-semibold font-inter" }, "Telegram")
-                            ]),
+                <!-- Discord Copy -->
+                <button 
+                    id="discordBtn"
+                    class="flex items-center gap-3 px-8 py-4 bg-[#5865F2]/10 text-[#5865F2] border border-[#5865F2]/30 rounded-xl hover:bg-[#5865F2] hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(88,101,242,0.4)] relative overflow-hidden group"
+                >
+                    <i class="icon icon-message-square w-5 h-5"></i>
+                    <span class="font-semibold font-inter dir-ltr" id="discordText">1_ing1</span>
+                    <span class="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <span class="text-xs text-white font-arabic">نسخ</span>
+                    </span>
+                </button>
 
-                            // Discord
-                            React.createElement('button', {
-                                key: 'discord',
-                                onClick: copyDiscord,
-                                className: `flex items-center gap-3 px-8 py-4 border rounded-xl transition-all duration-300 hover:scale-105 relative overflow-hidden group ${discordCopied ? 'bg-green-500/20 text-green-400 border-green-500/50 hover:bg-green-500 hover:text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]' : 'bg-[#5865F2]/10 text-[#5865F2] border-[#5865F2]/30 hover:bg-[#5865F2] hover:text-white hover:shadow-[0_0_20px_rgba(88,101,242,0.4)]'}`
-                            }, [
-                                discordCopied ? React.createElement(Check, { key: 'check-icon', className: "w-5 h-5" }) : React.createElement(MessageSquare, { key: 'msg-icon', className: "w-5 h-5" }),
-                                React.createElement('span', { key: 'discord-text', className: "font-semibold font-inter dir-ltr" }, discordCopied ? "تم النسخ!" : "1_ing1"),
-                                !discordCopied && React.createElement('span', {
-                                    key: 'hover-text',
-                                    className: 'absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200'
-                                }, React.createElement('span', { className: 'text-xs text-white font-arabic' }, 'نسخ'))
-                            ]),
+                <!-- Email -->
+                <a 
+                    href="mailto:vndxs.group@gmail.com" 
+                    class="flex items-center gap-3 px-8 py-4 bg-gray-100/10 text-gray-300 border border-white/10 rounded-xl hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105"
+                >
+                    <i class="icon icon-mail w-5 h-5"></i>
+                    <span class="font-semibold font-inter">Email</span>
+                </a>
 
-                            // Email
-                            React.createElement('a', {
-                                key: 'email',
-                                href: 'mailto:vndxs.group@gmail.com',
-                                className: 'flex items-center gap-3 px-8 py-4 bg-gray-100/10 text-gray-300 border border-white/10 rounded-xl hover:bg-white hover:text-black transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105'
-                            }, [
-                                React.createElement(Mail, { key: 'mail-icon', className: "w-5 h-5" }),
-                                React.createElement('span', { key: 'email-text', className: "font-semibold font-inter" }, "Email")
-                            ])
-                        ]),
-                        React.createElement('div', {
-                            key: 'email-display',
-                            className: 'mt-8 text-sm text-gray-500 font-inter'
-                        }, 'vndxs.group@gmail.com')
-                    ]),
+            </div>
+            
+            <div class="mt-8 text-sm text-gray-500 font-inter">
+                vndxs.group@gmail.com
+            </div>
+        </section>
 
-                    // Footer
-                    React.createElement('footer', {
-                        key: 'footer',
-                        className: 'w-full text-center border-t border-white/5 pt-8 pb-4'
-                    }, [
-                        React.createElement('p', {
-                            key: 'copyright',
-                            className: 'text-gray-500 text-sm font-arabic mb-2'
-                        }, 'جميع الحقوق محفوظة © 2025 VNDXS Group'),
-                        React.createElement('button', {
-                            key: 'terms-btn',
-                            onClick: () => setIsTermsOpen(true),
-                            className: 'text-gray-600 text-xs hover:text-blue-400 transition-colors flex items-center justify-center gap-1 mx-auto'
-                        }, [
-                            React.createElement(FileText, { key: 'file-icon', className: "w-3 h-3" }),
-                            'شروط الخدمة'
-                        ])
-                    ])
-                ]),
+        <!-- Footer -->
+        <footer class="w-full text-center border-t border-white/5 pt-8 pb-4">
+            <p class="text-gray-500 text-sm font-arabic mb-2">
+                جميع الحقوق محفوظة © 2025 VNDXS Group
+            </p>
+            <button 
+                id="termsBtn"
+                class="text-gray-600 text-xs hover:text-blue-400 transition-colors flex items-center justify-center gap-1 mx-auto"
+            >
+                <i class="icon icon-file-text w-3 h-3"></i>
+                شروط الخدمة
+            </button>
+        </footer>
+    </div>
 
-                // Terms Modal
-                isTermsOpen && React.createElement('div', {
-                    key: 'modal',
-                    className: 'fixed inset-0 z-50 flex items-center justify-center p-4'
-                }, [
-                    React.createElement('div', {
-                        key: 'overlay',
-                        className: 'absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity',
-                        onClick: () => setIsTermsOpen(false)
-                    }),
-                    React.createElement('div', {
-                        key: 'modal-content',
-                        className: 'relative bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-fade-in-up'
-                    }, [
-                        // Modal Header
-                        React.createElement('div', {
-                            key: 'modal-header',
-                            className: 'p-6 border-b border-white/10 flex justify-between items-center bg-[#0f0f0f]'
-                        }, [
-                            React.createElement('h2', {
-                                key: 'modal-title',
-                                className: 'text-xl font-bold text-white flex items-center gap-2'
-                            }, [
-                                React.createElement(FileText, { key: 'modal-icon', className: "w-5 h-5 text-blue-500" }),
-                                'شروط الخدمة'
-                            ]),
-                            React.createElement('button', {
-                                key: 'close-btn',
-                                onClick: () => setIsTermsOpen(false),
-                                className: 'text-gray-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full hover:bg-white/10'
-                            }, React.createElement(X, { className: "w-5 h-5" }))
-                        ]),
+    <!-- Terms Modal -->
+    <div id="termsModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="modalOverlay"></div>
+        
+        <div class="relative bg-[#0a0a0a] border border-white/10 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-fade-in-up">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0f0f0f]">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="icon icon-file-text w-5 h-5 text-blue-500"></i>
+                    شروط الخدمة
+                </h2>
+                <button id="closeModal" class="text-gray-400 hover:text-white transition-colors bg-white/5 p-2 rounded-full hover:bg-white/10">
+                    <i class="icon icon-x w-5 h-5"></i>
+                </button>
+            </div>
 
-                        // Modal Content
-                        React.createElement('div', {
-                            key: 'modal-body',
-                            className: 'p-6 max-h-[70vh] overflow-y-auto custom-scrollbar text-right'
-                        }, [
-                            // Payment Methods
-                            React.createElement('div', {
-                                key: 'payment',
-                                className: 'mb-6'
-                            }, [
-                                React.createElement('h3', {
-                                    key: 'payment-title',
-                                    className: 'text-blue-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2'
-                                }, [
-                                    React.createElement(CreditCard, { key: 'card-icon', className: "w-4 h-4" }),
-                                    'طرق الدفع المقبولة'
-                                ]),
-                                React.createElement('ul', {
-                                    key: 'payment-list',
-                                    className: 'space-y-2 text-gray-300 text-sm'
-                                }, [
-                                    React.createElement('li', { key: 'card', className: 'flex items-center gap-2' }, [
-                                        React.createElement('span', { key: 'dot1', className: 'w-1.5 h-1.5 rounded-full bg-blue-500' }),
-                                        'بطاقات الائتمان (Credit Card)'
-                                    ]),
-                                    React.createElement('li', { key: 'asia', className: 'flex items-center gap-2' }, [
-                                        React.createElement('span', { key: 'dot2', className: 'w-1.5 h-1.5 rounded-full bg-blue-500' }),
-                                        'رصيد آسياسيل (Asiacell)'
-                                    ]),
-                                    React.createElement('li', { 
-                                        key: 'note',
-                                        className: 'text-xs text-red-400 mt-2 block bg-red-900/10 p-2 rounded border border-red-900/20'
-                                    }, '* لا توجد طرق دفع أخرى متاحة حالياً.')
-                                ])
-                            ]),
+            <!-- Modal Content -->
+            <div class="p-6 max-h-[70vh] overflow-y-auto custom-scrollbar text-right">
+                
+                <div class="mb-6">
+                    <h3 class="text-blue-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="icon icon-credit-card w-4 h-4"></i>
+                        طرق الدفع المقبولة
+                    </h3>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                            بطاقات الائتمان (Credit Card)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                            رصيد آسياسيل (Asiacell)
+                        </li>
+                        <li class="text-xs text-red-400 mt-2 block bg-red-900/10 p-2 rounded border border-red-900/20">
+                            * لا توجد طرق دفع أخرى متاحة حالياً.
+                        </li>
+                    </ul>
+                </div>
 
-                            // Rejected Content
-                            React.createElement('div', {
-                                key: 'rejected',
-                                className: 'mb-6'
-                            }, [
-                                React.createElement('h3', {
-                                    key: 'rejected-title',
-                                    className: 'text-red-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2'
-                                }, [
-                                    React.createElement(ShieldCheck, { key: 'shield-icon', className: "w-4 h-4" }),
-                                    'المحتوى المرفوض (محظور كلياً)'
-                                ]),
-                                React.createElement('ul', {
-                                    key: 'rejected-list',
-                                    className: 'grid grid-cols-1 gap-2 text-gray-300 text-sm'
-                                }, [
-                                    "المواقع الإباحية",
-                                    "المواقع العنصرية", 
-                                    "مواقع الجندر والمثلية",
-                                    "المواقع السياسية"
-                                ].map((item, i) => 
-                                    React.createElement('li', {
-                                        key: i,
-                                        className: 'flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10'
-                                    }, [
-                                        React.createElement(X, { key: 'x-icon', className: "w-4 h-4 text-red-500" }),
-                                        item
-                                    ])
-                                )
-                                )
-                            ]),
+                <div class="mb-6">
+                    <h3 class="text-red-400 text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="icon icon-shield-check w-4 h-4"></i>
+                        المحتوى المرفوض (محظور كلياً)
+                    </h3>
+                    <ul class="grid grid-cols-1 gap-2 text-gray-300 text-sm">
+                        <li class="flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10">
+                            <i class="icon icon-x w-4 h-4 text-red-500"></i>
+                            المواقع الإباحية
+                        </li>
+                        <li class="flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10">
+                            <i class="icon icon-x w-4 h-4 text-red-500"></i>
+                            المواقع العنصرية
+                        </li>
+                        <li class="flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10">
+                            <i class="icon icon-x w-4 h-4 text-red-500"></i>
+                            مواقع الجندر والمثلية
+                        </li>
+                        <li class="flex items-center gap-2 bg-red-500/5 p-2 rounded border border-red-500/10">
+                            <i class="icon icon-x w-4 h-4 text-red-500"></i>
+                            المواقع السياسية
+                        </li>
+                    </ul>
+                </div>
 
-                            // General Policies
-                            React.createElement('div', {
-                                key: 'policies'
-                            }, [
-                                React.createElement('h3', {
-                                    key: 'policies-title',
-                                    className: 'text-gray-400 text-sm font-bold uppercase tracking-wider mb-3'
-                                }, 'السياسات العامة'),
-                                React.createElement('ul', {
-                                    key: 'policies-list',
-                                    className: 'space-y-2 text-gray-400 text-xs'
-                                }, [
-                                    React.createElement('li', { key: 'p1' }, '• عدم المسؤولية عن أخطاء الدفع من طرف العميل.'),
-                                    React.createElement('li', { key: 'p2' }, '• نلتزم بالحفاظ على خصوصية بيانات العملاء بشكل تام.'),
-                                    React.createElement('li', { key: 'p3' }, '• حقوق الملكية الفكرية للمشروع تنتقل للعميل بعد الدفع الكامل.'),
-                                    React.createElement('li', { key: 'p4' }, '• نحتفظ بحق إلغاء أي مشروع يتبين أنه يخالف الشروط أعلاه.')
-                                ])
-                            ])
-                        ]),
+                <div>
+                    <h3 class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-3">السياسات العامة</h3>
+                    <ul class="space-y-2 text-gray-400 text-xs">
+                        <li>• عدم المسؤولية عن أخطاء الدفع من طرف العميل.</li>
+                        <li>• نلتزم بالحفاظ على خصوصية بيانات العملاء بشكل تام.</li>
+                        <li>• حقوق الملكية الفكرية للمشروع تنتقل للعميل بعد الدفع الكامل.</li>
+                        <li>• نحتفظ بحق إلغاء أي مشروع يتبين أنه يخالف الشروط أعلاه.</li>
+                    </ul>
+                </div>
+            </div>
 
-                        // Modal Footer
-                        React.createElement('div', {
-                            key: 'modal-footer',
-                            className: 'p-4 border-t border-white/10 bg-[#0f0f0f] text-center'
-                        }, 
-                            React.createElement('button', {
-                                onClick: () => setIsTermsOpen(false),
-                                className: 'w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors'
-                            }, 'فهمت واوافق')
-                        )
-                    ])
-                ])
-            ]);
-        };
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-white/10 bg-[#0f0f0f] text-center">
+                <button id="agreeBtn" class="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors">
+                    فهمت واوافق
+                </button>
+            </div>
+        </div>
+    </div>
 
-        ReactDOM.render(React.createElement(App), document.getElementById('root'));
+    <script>
+        // Discord Copy Function
+        document.getElementById('discordBtn').addEventListener('click', function() {
+            const discordUser = "1_ing1";
+            const discordText = document.getElementById('discordText');
+            const button = this;
+            
+            navigator.clipboard.writeText(discordUser).then(() => {
+                // Change button style
+                button.classList.remove('bg-[#5865F2]/10', 'text-[#5865F2]', 'border-[#5865F2]/30');
+                button.classList.add('bg-green-500/20', 'text-green-400', 'border-green-500/50', 'shadow-[0_0_20px_rgba(34,197,94,0.4)]');
+                
+                // Change text
+                discordText.textContent = "تم النسخ!";
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.classList.remove('bg-green-500/20', 'text-green-400', 'border-green-500/50', 'shadow-[0_0_20px_rgba(34,197,94,0.4)]');
+                    button.classList.add('bg-[#5865F2]/10', 'text-[#5865F2]', 'border-[#5865F2]/30');
+                    discordText.textContent = "1_ing1";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('تعذر النسخ، يرجى المحاولة يدوياً');
+            });
+        });
+
+        // Terms Modal Functions
+        const termsModal = document.getElementById('termsModal');
+        const termsBtn = document.getElementById('termsBtn');
+        const closeModal = document.getElementById('closeModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const agreeBtn = document.getElementById('agreeBtn');
+
+        function openModal() {
+            termsModal.classList.remove('hidden');
+        }
+
+        function closeModalFunc() {
+            termsModal.classList.add('hidden');
+        }
+
+        termsBtn.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        modalOverlay.addEventListener('click', closeModalFunc);
+        agreeBtn.addEventListener('click', closeModalFunc);
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModalFunc();
+            }
+        });
     </script>
 </body>
 </html>
